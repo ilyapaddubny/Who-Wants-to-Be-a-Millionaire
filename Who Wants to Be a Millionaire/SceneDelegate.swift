@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let artistVC = StartGameViewController()
+        let artistVC = QuestionViewController()
         let navigationController = UINavigationController(rootViewController: artistVC)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
