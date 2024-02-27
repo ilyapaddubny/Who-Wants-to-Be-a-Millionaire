@@ -14,6 +14,10 @@
 		2D1DD7FD2B8CECF4005186A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD7FC2B8CECF4005186A4 /* Assets.xcassets */; };
 		2D1DD8002B8CECF4005186A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD7FE2B8CECF4005186A4 /* LaunchScreen.storyboard */; };
 		2D1DD8082B8CF1DE005186A4 /* StartGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */; };
+		2D1DD80A2B8E12AA005186A4 /* HTMLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8092B8E12AA005186A4 /* HTMLResponse.swift */; };
+		2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD80B2B8E12F2005186A4 /* Question.swift */; };
+		2D1DD80E2B8E18C2005186A4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD80D2B8E18C2005186A4 /* DataManager.swift */; };
+		2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8102B8E2013005186A4 /* GameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		2D1DD7FF2B8CECF4005186A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D1DD8012B8CECF4005186A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
+		2D1DD8092B8E12AA005186A4 /* HTMLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLResponse.swift; sourceTree = "<group>"; };
+		2D1DD80B2B8E12F2005186A4 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		2D1DD80D2B8E18C2005186A4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		2D1DD8102B8E2013005186A4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,9 @@
 		2D1DD7F22B8CECF1005186A4 /* Who Wants to Be a Millionaire */ = {
 			isa = PBXGroup;
 			children = (
+				2D1DD80F2B8E1F5B005186A4 /* Model */,
+				2D1DD80D2B8E18C2005186A4 /* DataManager.swift */,
+				2D1DD8102B8E2013005186A4 /* GameViewModel.swift */,
 				2D1DD7F32B8CECF1005186A4 /* AppDelegate.swift */,
 				2D1DD7F52B8CECF2005186A4 /* SceneDelegate.swift */,
 				2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */,
@@ -68,6 +79,15 @@
 				2D1DD8012B8CECF4005186A4 /* Info.plist */,
 			);
 			path = "Who Wants to Be a Millionaire";
+			sourceTree = "<group>";
+		};
+		2D1DD80F2B8E1F5B005186A4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D1DD80B2B8E12F2005186A4 /* Question.swift */,
+				2D1DD8092B8E12AA005186A4 /* HTMLResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +163,10 @@
 			files = (
 				2D1DD7F82B8CECF2005186A4 /* ViewController.swift in Sources */,
 				2D1DD7F42B8CECF1005186A4 /* AppDelegate.swift in Sources */,
+				2D1DD80A2B8E12AA005186A4 /* HTMLResponse.swift in Sources */,
+				2D1DD80E2B8E18C2005186A4 /* DataManager.swift in Sources */,
+				2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */,
+				2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */,
 				2D1DD7F62B8CECF2005186A4 /* SceneDelegate.swift in Sources */,
 				2D1DD8082B8CF1DE005186A4 /* StartGameViewController.swift in Sources */,
 			);

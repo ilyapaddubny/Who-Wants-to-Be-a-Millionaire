@@ -10,9 +10,11 @@ import UIKit
 class StartGameViewController: UIViewController {
     
     let label = UILabel()
+    var viewModel: GameViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = GameViewModel(delegate: self)
         
         label.text = "Hello everyone!"
         label.sizeToFit()
@@ -31,4 +33,9 @@ class StartGameViewController: UIViewController {
     }
     */
 
+}
+
+
+extension StartGameViewController: GameViewModelDelegate {
+    
 }
