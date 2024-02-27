@@ -41,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D073004A2B8D518A006D4D6B /* SnapKit in Frameworks */,
+				D073004C2B8D518A006D4D6B /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +76,8 @@
 				2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */,
 				2D1DD7F72B8CECF2005186A4 /* ViewController.swift */,
 				2D1DD7F92B8CECF2005186A4 /* Main.storyboard */,
+				D073004D2B8D5499006D4D6B /* QuestionTableVC.swift */,
+				D073004F2B8D5523006D4D6B /* QuestionCell.swift */,
 				2D1DD7FC2B8CECF4005186A4 /* Assets.xcassets */,
 				2D1DD7FE2B8CECF4005186A4 /* LaunchScreen.storyboard */,
 				2D1DD8012B8CECF4005186A4 /* Info.plist */,
@@ -106,6 +110,10 @@
 			dependencies = (
 			);
 			name = "Who Wants to Be a Millionaire";
+			packageProductDependencies = (
+				D07300492B8D518A006D4D6B /* SnapKit */,
+				D073004B2B8D518A006D4D6B /* SnapKit-Dynamic */,
+			);
 			productName = "Who Wants to Be a Millionaire";
 			productReference = 2D1DD7F02B8CECF1005186A4 /* Who Wants to Be a Millionaire.app */;
 			productType = "com.apple.product-type.application";
@@ -134,6 +142,9 @@
 				Base,
 			);
 			mainGroup = 2D1DD7E72B8CECF1005186A4;
+			packageReferences = (
+				D07300482B8D518A006D4D6B /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 2D1DD7F12B8CECF1005186A4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -168,6 +179,8 @@
 				2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */,
 				2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */,
 				2D1DD7F62B8CECF2005186A4 /* SceneDelegate.swift in Sources */,
+				D07300502B8D5523006D4D6B /* QuestionCell.swift in Sources */,
+				D073004E2B8D5499006D4D6B /* QuestionTableVC.swift in Sources */,
 				2D1DD8082B8CF1DE005186A4 /* StartGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +406,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D07300482B8D518A006D4D6B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mabolotska/SnapKit";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D07300492B8D518A006D4D6B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D07300482B8D518A006D4D6B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		D073004B2B8D518A006D4D6B /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D07300482B8D518A006D4D6B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2D1DD7E82B8CECF1005186A4 /* Project object */;
 }
