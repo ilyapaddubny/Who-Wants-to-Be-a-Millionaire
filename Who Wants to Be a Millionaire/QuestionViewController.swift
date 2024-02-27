@@ -11,9 +11,9 @@ import UIKit
 class QuestionViewController: UIViewController {
     
     // MARK: - UI
+    
     var questionNumber: Int = 1
     var actualSum: Int = 564_000
-    
     
     private lazy var backgroungImageView: UIImageView = {
         let element = UIImageView()
@@ -34,9 +34,6 @@ class QuestionViewController: UIViewController {
         element.textAlignment = .center
         element.numberOfLines = 0
         element.text = "Вопрос \n\(questionNumber)"
-        
-        
-        
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -45,7 +42,6 @@ class QuestionViewController: UIViewController {
         let element = UIImageView()
         element.image = UIImage(named: "logo")
         element.contentMode = .scaleAspectFit
-        
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -58,10 +54,9 @@ class QuestionViewController: UIViewController {
         element.numberOfLines = 0
         
         let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.groupingSeparator = " "
-            
-            element.text = numberFormatter.string(from: NSNumber(value: actualSum))
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.groupingSeparator = " "
+        element.text = numberFormatter.string(from: NSNumber(value: actualSum))
         
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -69,45 +64,42 @@ class QuestionViewController: UIViewController {
     
     private lazy var questionView: UIView = {
         let element = UIView()
-        
-        
-        
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
     private lazy var questionBackgroundImage: UIImageView = {
         let element = UIImageView()
-        
         element.image = UIImage(named: "question_rectangle")
-        
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
-    
     private lazy var questLabel: UILabel = {
         let element = UILabel()
-        element.text = "Возле какой горы-вулкана был впервые найден драгоценный камень танзанит?"
+        element.text = "Вопрос"
         element.font = .systemFont(ofSize: 22)
         element.textAlignment = .center
         element.textColor = .white
         element.numberOfLines = 0
-        
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
-    
-    
     
     
     
     private lazy var answerA: UIButton = {
         let element = UIButton()
-        element.setImage(UIImage(named: "question_empty"), for: .normal)
-        element.setTitle("Вариант А:", for: .normal)
-        element.tintColor = .white
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        element.setBackgroundImage(UIImage(named: "question_empty"), for: .normal)
+        
+        let attributedTitle = NSMutableAttributedString(string: "A:  Вариант")
+        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
+        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
+        element.setAttributedTitle(attributedTitle, for: .normal)
+        
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 5)
+        element.contentHorizontalAlignment = .left
         
         element.addTarget(self, action: #selector(answerButtonTapped), for: .touchUpInside)
         
@@ -117,10 +109,16 @@ class QuestionViewController: UIViewController {
     
     private lazy var answerB: UIButton = {
         let element = UIButton()
-        element.setImage(UIImage(named: "question_empty"), for: .normal)
-        element.setTitle("Вариант B:", for: .normal)
-        element.tintColor = .white
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        element.setBackgroundImage(UIImage(named: "question_empty"), for: .normal)
+        
+        let attributedTitle = NSMutableAttributedString(string: "B:  Вариант")
+        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
+        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
+        
+        element.setAttributedTitle(attributedTitle, for: .normal)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 5)
+        element.contentHorizontalAlignment = .left
         
         element.addTarget(self, action: #selector(answerButtonTapped), for: .touchUpInside)
         
@@ -130,10 +128,16 @@ class QuestionViewController: UIViewController {
     
     private lazy var answerC: UIButton = {
         let element = UIButton()
-        element.setImage(UIImage(named: "question_empty"), for: .normal)
-        element.setTitle("Вариант C:", for: .normal)
-        element.tintColor = .white
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        element.setBackgroundImage(UIImage(named: "question_empty"), for: .normal)
+        
+        let attributedTitle = NSMutableAttributedString(string: "C:  Вариант")
+        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
+        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
+        element.setAttributedTitle(attributedTitle, for: .normal)
+        
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 5)
+        element.contentHorizontalAlignment = .left
         
         element.addTarget(self, action: #selector(answerButtonTapped), for: .touchUpInside)
         
@@ -143,10 +147,16 @@ class QuestionViewController: UIViewController {
     
     private lazy var answerD: UIButton = {
         let element = UIButton()
-        element.setImage(UIImage(named: "question_empty"), for: .normal)
-        element.setTitle("Вариант D:", for: .normal)
-        element.tintColor = .white
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        element.setBackgroundImage(UIImage(named: "question_empty"), for: .normal)
+        
+        let attributedTitle = NSMutableAttributedString(string: "D:  Вариант")
+        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
+        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
+        element.setAttributedTitle(attributedTitle, for: .normal)
+        
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 5)
+        element.contentHorizontalAlignment = .left
         
         element.addTarget(self, action: #selector(answerButtonTapped), for: .touchUpInside)
         
@@ -162,7 +172,6 @@ class QuestionViewController: UIViewController {
         element.contentMode = .scaleAspectFit
         
         element.addTarget(self, action: #selector(halfHelpButton), for: .touchUpInside)
-        
         
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -190,23 +199,22 @@ class QuestionViewController: UIViewController {
         return element
     }()
     
-    
     // MARK: - Logic
+    
+    @objc func answerButtonTapped(_ sender: UIButton) {
+        print("He-he")
+        sender.setBackgroundImage(UIImage(named: "question_selected"), for: .normal)
+    }
+    
     
     private var halfHelpButtonPressed = false
     private var callHelpButtonPressed = false
     private var friendHelpButtonPressed = false
     
-    @objc func answerButtonTapped(_ sender: UIButton) {
-        print("He-he")
-        sender.setImage(UIImage(named: "question_selected"), for: .normal)
-    }
-    
     @objc func halfHelpButton(_ sender: UIButton) {
         if halfHelpButtonPressed == false {
             print("1")
             sender.setImage(UIImage(named: "help_50_50_crossed"), for: .normal)
-            
             halfHelpButtonPressed = true
         }
     }
@@ -215,7 +223,6 @@ class QuestionViewController: UIViewController {
         if callHelpButtonPressed == false {
             print("2")
             sender.setImage(UIImage(named: "help_crossed"), for: .normal)
-            
             callHelpButtonPressed = true
         }
     }
@@ -224,18 +231,9 @@ class QuestionViewController: UIViewController {
         if friendHelpButtonPressed == false {
             print("3")
             sender.setImage(UIImage(named: "help_audience_crossed"), for: .normal)
-            
             friendHelpButtonPressed = true
         }
     }
-   
-        
-    
-    
-    
-    
-    
-    
     
     // MARK: - Lyfe Cycle
     
@@ -247,10 +245,6 @@ class QuestionViewController: UIViewController {
         
         variantsStackView.spacing = 15
         footerStackView.spacing = 15
-        
-        
-        
-        
     }
     
     private func setView() {
@@ -262,7 +256,6 @@ class QuestionViewController: UIViewController {
                 questionNumberLabel,
                 logo,
                 actualSumLabel
-                
             ])
         
         variantsStackView = UIStackView(
@@ -273,7 +266,6 @@ class QuestionViewController: UIViewController {
                 answerB,
                 answerC,
                 answerD
-                
             ])
         
         footerStackView = UIStackView(
@@ -283,7 +275,6 @@ class QuestionViewController: UIViewController {
                 halfHelp,
                 callHelp,
                 friendHelp,
-                
             ])
         
         mainStackView = UIStackView(
@@ -297,9 +288,6 @@ class QuestionViewController: UIViewController {
             ])
         
         
-        
-        
-        
         view.addSubview(backgroungImageView)
         view.addSubview(mainStackView)
         view.addSubview(headerStackView)
@@ -310,8 +298,6 @@ class QuestionViewController: UIViewController {
         view.addSubview(footerStackView)
         
     }
-    
-    
 }
 
 // MARK: - Setup constraints
@@ -324,7 +310,7 @@ extension QuestionViewController {
             backgroungImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroungImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -30),
             mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 13),
             mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -13),
@@ -351,14 +337,10 @@ extension QuestionViewController {
             variantsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             variantsStackView.heightAnchor.constraint(equalToConstant: 250),
             
-            
             answerA.heightAnchor.constraint(equalTo: answerB.heightAnchor),
             answerB.heightAnchor.constraint(equalTo: answerC.heightAnchor),
             answerC.heightAnchor.constraint(equalTo: answerD.heightAnchor),
             answerD.heightAnchor.constraint(equalTo: answerA.heightAnchor),
-            
-            
-            
             
             questionBackgroundImage.topAnchor.constraint(equalTo: questLabel.topAnchor, constant: -30),
             questionBackgroundImage.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
@@ -370,7 +352,6 @@ extension QuestionViewController {
             questLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             questLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             
-            
             footerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             footerStackView.topAnchor.constraint(equalTo: variantsStackView.bottomAnchor),
             footerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
@@ -380,8 +361,6 @@ extension QuestionViewController {
             callHelp.widthAnchor.constraint(equalTo: friendHelp.widthAnchor),
             friendHelp.widthAnchor.constraint(equalTo: halfHelp.widthAnchor),
             halfHelp.widthAnchor.constraint(equalTo: callHelp.widthAnchor),
-            
-            
         ])
     }
 }
@@ -398,6 +377,3 @@ extension UIStackView {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 }
-
-
-
