@@ -7,8 +7,8 @@
 
 import UIKit
 
-class QuestionCell: UITableViewCell {
-    static let identifier = "QuestionCell"
+class ProgressViewCell: UITableViewCell {
+    static let identifier = "ProgressViewCell"
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,14 +27,14 @@ class QuestionCell: UITableViewCell {
 
      let questionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Roboto", size: 20)
+        label.font = UIFont(name: "Roboto-Regular", size: 20)
          label.textColor = .white
          return label
      }()
 
      let amountOfMoneyLabel: UILabel = {
          let label = UILabel()
-         label.font = UIFont(name: "Roboto", size: 20)
+         label.font = UIFont(name: "Roboto-Regular", size: 20)
          label.textColor = .white
           return label
       }()
@@ -42,7 +42,7 @@ class QuestionCell: UITableViewCell {
 
 }
 
-extension QuestionCell {
+extension ProgressViewCell {
     func initialize() {
         contentView.addSubview(questionImageView)
         questionImageView.addSubview(questionLabel)

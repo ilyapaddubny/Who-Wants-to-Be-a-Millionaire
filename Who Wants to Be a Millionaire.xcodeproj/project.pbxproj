@@ -20,8 +20,10 @@
 		2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8102B8E2013005186A4 /* GameViewModel.swift */; };
 		D073005B2B8E660D006D4D6B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D07300492B8D518A006D4D6B /* SnapKit */; };
 		D073005C2B8E660D006D4D6B /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D073004B2B8D518A006D4D6B /* SnapKit-Dynamic */; };
-		D073005F2B8E6A9F006D4D6B /*  QuestionTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D073005E2B8E6A9F006D4D6B /*  QuestionTableVC.swift */; };
-		D07300652B8E6DA7006D4D6B /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07300642B8E6DA7006D4D6B /* QuestionCell.swift */; };
+		D073005F2B8E6A9F006D4D6B /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D073005E2B8E6A9F006D4D6B /* ProgressViewController.swift */; };
+		D07300652B8E6DA7006D4D6B /* ProgressViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07300642B8E6DA7006D4D6B /* ProgressViewCell.swift */; };
+		D073006C2B8F436F006D4D6B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D073006B2B8F436F006D4D6B /* Constants.swift */; };
+		D073006E2B8F44C3006D4D6B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D073006D2B8F44C3006D4D6B /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +40,10 @@
 		2D1DD80B2B8E12F2005186A4 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		2D1DD80D2B8E18C2005186A4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2D1DD8102B8E2013005186A4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
-		D073005E2B8E6A9F006D4D6B /*  QuestionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " QuestionTableVC.swift"; sourceTree = "<group>"; };
-		D07300642B8E6DA7006D4D6B /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		D073005E2B8E6A9F006D4D6B /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		D07300642B8E6DA7006D4D6B /* ProgressViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewCell.swift; sourceTree = "<group>"; };
+		D073006B2B8F436F006D4D6B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D073006D2B8F44C3006D4D6B /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 		2D1DD7F22B8CECF1005186A4 /* Who Wants to Be a Millionaire */ = {
 			isa = PBXGroup;
 			children = (
+				D073006A2B8F4360006D4D6B /* Utilities */,
 				2D1DD80F2B8E1F5B005186A4 /* Model */,
 				D07300632B8E6D0E006D4D6B /* Views */,
 				D073005D2B8E6A70006D4D6B /* Controllers */,
@@ -103,7 +108,7 @@
 		D073005D2B8E6A70006D4D6B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D073005E2B8E6A9F006D4D6B /*  QuestionTableVC.swift */,
+				D073005E2B8E6A9F006D4D6B /* ProgressViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -111,9 +116,18 @@
 		D07300632B8E6D0E006D4D6B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D07300642B8E6DA7006D4D6B /* QuestionCell.swift */,
+				D07300642B8E6DA7006D4D6B /* ProgressViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D073006A2B8F4360006D4D6B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D073006D2B8F44C3006D4D6B /* Roboto-Regular.ttf */,
+				D073006B2B8F436F006D4D6B /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +197,7 @@
 			files = (
 				2D1DD8002B8CECF4005186A4 /* LaunchScreen.storyboard in Resources */,
 				2D1DD7FD2B8CECF4005186A4 /* Assets.xcassets in Resources */,
+				D073006E2B8F44C3006D4D6B /* Roboto-Regular.ttf in Resources */,
 				2D1DD7FB2B8CECF2005186A4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,15 +210,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D1DD7F82B8CECF2005186A4 /* ViewController.swift in Sources */,
+				D073006C2B8F436F006D4D6B /* Constants.swift in Sources */,
 				2D1DD7F42B8CECF1005186A4 /* AppDelegate.swift in Sources */,
 				2D1DD80A2B8E12AA005186A4 /* HTMLResponse.swift in Sources */,
 				2D1DD80E2B8E18C2005186A4 /* DataManager.swift in Sources */,
 				2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */,
-				D073005F2B8E6A9F006D4D6B /*  QuestionTableVC.swift in Sources */,
+				D073005F2B8E6A9F006D4D6B /* ProgressViewController.swift in Sources */,
 				2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */,
 				2D1DD7F62B8CECF2005186A4 /* SceneDelegate.swift in Sources */,
 				2D1DD8082B8CF1DE005186A4 /* StartGameViewController.swift in Sources */,
-				D07300652B8E6DA7006D4D6B /* QuestionCell.swift in Sources */,
+				D07300652B8E6DA7006D4D6B /* ProgressViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
