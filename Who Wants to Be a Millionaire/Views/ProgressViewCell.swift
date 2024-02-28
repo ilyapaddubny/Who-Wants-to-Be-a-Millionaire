@@ -48,23 +48,34 @@ extension ProgressViewCell {
         questionImageView.addSubview(questionLabel)
         questionImageView.addSubview(amountOfMoneyLabel)
 
-        questionImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
-        }
+        questionImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            questionImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            questionImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            questionImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            questionImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
 
-        questionLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.centerY.equalToSuperview()
-            make.trailing.lessThanOrEqualTo(amountOfMoneyLabel.snp.leading).offset(-10)
-        }
+        
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            questionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            questionLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            questionLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountOfMoneyLabel.leadingAnchor, constant: -10)
+        ])
 
-        amountOfMoneyLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
-            make.centerY.equalToSuperview()
-        }
+        
+        amountOfMoneyLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            amountOfMoneyLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            amountOfMoneyLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
 
-        contentView.snp.makeConstraints { make in
-            make.height.lessThanOrEqualTo(38)
-        }
+        
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentView.heightAnchor.constraint(lessThanOrEqualToConstant: 38)
+        ])
+
     }
 }
