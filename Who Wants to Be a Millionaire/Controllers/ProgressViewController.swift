@@ -9,31 +9,33 @@ import UIKit
 import SnapKit
 
 
-class QuestionTableVC: UIViewController {
+class ProgressViewController: UIViewController {
     let questions = (1...15).reversed().map { "Question \($0)" }
-    let amountOfMoney = (1...15).map { "\($0) USD" }
+    var amountOfMoney = ["1000000 USD", "500000 USD", "250000 USD", "125000 USD", "64000 USD", "32000 USD", "16000 USD", "8000 USD", "4000 USD", "2000 USD", "1000 USD", "500 USD", "300 USD", "200 USD", "100 USD"]
+
 
     private let backgroundImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "background_empty")
+        image.image = Images.backgroundImage
         return image
     }()
 
     private let tableView: UITableView = {
         let tv = UITableView()
         tv.backgroundColor = .clear
-        tv.register(QuestionCell.self, forCellReuseIdentifier: QuestionCell.identifier)
+        tv.register(ProgressViewCell.self, forCellReuseIdentifier: ProgressViewCell.identifier)
         return tv
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        
     }
 }
 
 
-extension QuestionTableVC {
+extension ProgressViewController {
     func setupUI() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -55,26 +57,26 @@ extension QuestionTableVC {
     }
 }
 
-extension QuestionTableVC: UITableViewDelegate, UITableViewDataSource {
+extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return questions.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: QuestionCell.identifier, for: indexPath) as? QuestionCell else { fatalError("Unable to dequeue cell") }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProgressViewCell.identifier, for: indexPath) as? ProgressViewCell else { fatalError("Unable to dequeue cell") }
         cell.questionLabel.text = questions[indexPath.row]
         cell.amountOfMoneyLabel.text = amountOfMoney[indexPath.row]
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         switch indexPath.row {
           case 0:
-              cell.questionImageView.image = UIImage(named: "question_level_yellow")
+            cell.questionImageView.image = Images.yellowLevel
           case 5, 10:
-              cell.questionImageView.image = UIImage(named: "question_level_blue")
+            cell.questionImageView.image = Images.blueLevel
           case 14:
-              cell.questionImageView.image = UIImage(named: "question_level_green")
+            cell.questionImageView.image = Images.greenLevel
           default:
-              cell.questionImageView.image = UIImage(named: "question_level_purple")
+            cell.questionImageView.image = Images.purpleLevel
           }
 
           return cell
