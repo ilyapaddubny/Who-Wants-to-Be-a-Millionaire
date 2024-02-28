@@ -91,6 +91,7 @@
 				2D1DD7FC2B8CECF4005186A4 /* Assets.xcassets */,
 				2D1DD7FE2B8CECF4005186A4 /* LaunchScreen.storyboard */,
 				2D1DD8012B8CECF4005186A4 /* Info.plist */,
+				2D1DD8272B8E90D6005186A4 /* Sounds */,
 			);
 			path = "Who Wants to Be a Millionaire";
 			sourceTree = "<group>";
