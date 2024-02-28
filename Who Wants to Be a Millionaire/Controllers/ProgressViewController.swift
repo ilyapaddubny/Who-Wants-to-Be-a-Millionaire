@@ -1,12 +1,6 @@
-//
-//   QuestionTableVC.swift
-//  Who Wants to Be a Millionaire
-//
-//  Created by Maryna Bolotska on 27/02/24.
-//
+
 
 import UIKit
-import SnapKit
 
 
 class ProgressViewController: UIViewController {
@@ -40,20 +34,26 @@ extension ProgressViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        
+        view.addSubview(backgroundImage)
+        view.addSubview(tableView)
+        
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
 
-       view.addSubview(backgroundImage)
-       view.addSubview(tableView)
-
-        backgroundImage.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-
-        tableView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(34)
-            make.top.equalToSuperview().offset(124)
-            make.height.equalTo(632)
-            make.width.equalTo(321)
-        }
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 34),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 124),
+            tableView.heightAnchor.constraint(equalToConstant: 632),
+            tableView.widthAnchor.constraint(equalToConstant: 321)
+        ])
     }
 }
 
