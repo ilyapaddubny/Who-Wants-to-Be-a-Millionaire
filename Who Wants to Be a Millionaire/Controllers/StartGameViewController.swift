@@ -37,5 +37,21 @@ class StartGameViewController: UIViewController {
 
 
 extension StartGameViewController: GameViewModelDelegate {
+    func showQuestion(_ question: Question) {
+        
+    }
+    
+    func showCorrectAnswer(_ correctAnswer: String) {
+        
+    }
+    
+    func endGame(withMessage message: String) {
+        
+    }
+    
+    func updateTimerLabel(_ timeRemaining: Int) {
+        
+    }
+    
     
 }
