@@ -22,6 +22,7 @@
 		2D1DD83A2B8F8005005186A4 /* sound_wrong_answer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8352B8F8004005186A4 /* sound_wrong_answer.mp3 */; };
 		2D1DD83B2B8F8005005186A4 /* sound_decision_made.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8362B8F8004005186A4 /* sound_decision_made.mp3 */; };
 		2D1DD83C2B8F8005005186A4 /* sound_right_answer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8372B8F8005005186A4 /* sound_right_answer.mp3 */; };
+		2D1DD83F2B8F86C6005186A4 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */; };
 		6FE0D84B2B8E5BDD008C045E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		2D1DD8352B8F8004005186A4 /* sound_wrong_answer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_wrong_answer.mp3; sourceTree = "<group>"; };
 		2D1DD8362B8F8004005186A4 /* sound_decision_made.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_decision_made.mp3; sourceTree = "<group>"; };
 		2D1DD8372B8F8005005186A4 /* sound_right_answer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_right_answer.mp3; sourceTree = "<group>"; };
+		2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,13 +87,10 @@
 				2D1DD8102B8E2013005186A4 /* GameViewModel.swift */,
 				2D1DD7F32B8CECF1005186A4 /* AppDelegate.swift */,
 				2D1DD7F52B8CECF2005186A4 /* SceneDelegate.swift */,
-				6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */,
-				2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */,
 				2D1DD7F72B8CECF2005186A4 /* ViewController.swift */,
 				2D1DD7FC2B8CECF4005186A4 /* Assets.xcassets */,
 				2D1DD7FE2B8CECF4005186A4 /* LaunchScreen.storyboard */,
 				2D1DD8012B8CECF4005186A4 /* Info.plist */,
-				2D1DD8272B8E90D6005186A4 /* Sounds */,
 			);
 			path = "Who Wants to Be a Millionaire";
 			sourceTree = "<group>";
@@ -120,6 +119,9 @@
 		D073005D2B8E6A70006D4D6B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */,
+				6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */,
+				2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D1DD83F2B8F86C6005186A4 /* RulesViewController.swift in Sources */,
 				2D1DD7F82B8CECF2005186A4 /* ViewController.swift in Sources */,
 				2D1DD7F42B8CECF1005186A4 /* AppDelegate.swift in Sources */,
 				2D1DD80A2B8E12AA005186A4 /* HTMLResponse.swift in Sources */,
