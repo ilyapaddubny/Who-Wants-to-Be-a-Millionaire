@@ -24,6 +24,7 @@ class DataManager {
         // Loop through each question level
         for level in levels {
             guard let url = URL(string: level.rawValue) else {
+                print("🔴 invalidURL")
                 completion(.failure(NetworkError.invalidURL))
                 return
             }
@@ -37,6 +38,8 @@ class DataManager {
                 
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
+                    let response = response as? HTTPURLResponse
+                    print("🔴 \(response?.statusCode)")
                     completion(.failure(NetworkError.noData))
                     return
                 }
