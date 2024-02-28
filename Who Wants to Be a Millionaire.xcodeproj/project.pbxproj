@@ -18,6 +18,11 @@
 		2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD80B2B8E12F2005186A4 /* Question.swift */; };
 		2D1DD80E2B8E18C2005186A4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD80D2B8E18C2005186A4 /* DataManager.swift */; };
 		2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8102B8E2013005186A4 /* GameViewModel.swift */; };
+		2D1DD8222B8E90CD005186A4 /* sound_time_ticking.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD81D2B8E90CC005186A4 /* sound_time_ticking.mp3 */; };
+		2D1DD8232B8E90CD005186A4 /* sound_decision_made.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD81E2B8E90CD005186A4 /* sound_decision_made.mp3 */; };
+		2D1DD8242B8E90CD005186A4 /* sound_wrong_answer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD81F2B8E90CD005186A4 /* sound_wrong_answer.mp3 */; };
+		2D1DD8252B8E90CD005186A4 /* sound_game_starts.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8202B8E90CD005186A4 /* sound_game_starts.mp3 */; };
+		2D1DD8262B8E90CD005186A4 /* sound_right_answer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8212B8E90CD005186A4 /* sound_right_answer.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,11 @@
 		2D1DD80B2B8E12F2005186A4 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		2D1DD80D2B8E18C2005186A4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2D1DD8102B8E2013005186A4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		2D1DD81D2B8E90CC005186A4 /* sound_time_ticking.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_time_ticking.mp3; sourceTree = "<group>"; };
+		2D1DD81E2B8E90CD005186A4 /* sound_decision_made.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_decision_made.mp3; sourceTree = "<group>"; };
+		2D1DD81F2B8E90CD005186A4 /* sound_wrong_answer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_wrong_answer.mp3; sourceTree = "<group>"; };
+		2D1DD8202B8E90CD005186A4 /* sound_game_starts.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_game_starts.mp3; sourceTree = "<group>"; };
+		2D1DD8212B8E90CD005186A4 /* sound_right_answer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_right_answer.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,7 @@
 				2D1DD7FC2B8CECF4005186A4 /* Assets.xcassets */,
 				2D1DD7FE2B8CECF4005186A4 /* LaunchScreen.storyboard */,
 				2D1DD8012B8CECF4005186A4 /* Info.plist */,
+				2D1DD8272B8E90D6005186A4 /* Sounds */,
 			);
 			path = "Who Wants to Be a Millionaire";
 			sourceTree = "<group>";
@@ -88,6 +99,18 @@
 				2D1DD8092B8E12AA005186A4 /* HTMLResponse.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2D1DD8272B8E90D6005186A4 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				2D1DD81E2B8E90CD005186A4 /* sound_decision_made.mp3 */,
+				2D1DD8202B8E90CD005186A4 /* sound_game_starts.mp3 */,
+				2D1DD8212B8E90CD005186A4 /* sound_right_answer.mp3 */,
+				2D1DD81D2B8E90CC005186A4 /* sound_time_ticking.mp3 */,
+				2D1DD81F2B8E90CD005186A4 /* sound_wrong_answer.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +172,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D1DD8002B8CECF4005186A4 /* LaunchScreen.storyboard in Resources */,
+				2D1DD8262B8E90CD005186A4 /* sound_right_answer.mp3 in Resources */,
 				2D1DD7FD2B8CECF4005186A4 /* Assets.xcassets in Resources */,
+				2D1DD8232B8E90CD005186A4 /* sound_decision_made.mp3 in Resources */,
+				2D1DD8252B8E90CD005186A4 /* sound_game_starts.mp3 in Resources */,
 				2D1DD7FB2B8CECF2005186A4 /* Main.storyboard in Resources */,
+				2D1DD8242B8E90CD005186A4 /* sound_wrong_answer.mp3 in Resources */,
+				2D1DD8222B8E90CD005186A4 /* sound_time_ticking.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
