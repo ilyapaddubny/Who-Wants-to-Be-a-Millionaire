@@ -22,8 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
 
         let artistVC = StartGameViewController()
-        let navigationController = UINavigationController(rootViewController: artistVC)
-
+        let navigationController = UINavigationController(rootViewController: StartGameViewController())
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
