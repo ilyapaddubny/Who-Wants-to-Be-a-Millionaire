@@ -23,10 +23,11 @@
 		2D1DD83B2B8F8005005186A4 /* sound_decision_made.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8362B8F8004005186A4 /* sound_decision_made.mp3 */; };
 		2D1DD83C2B8F8005005186A4 /* sound_right_answer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8372B8F8005005186A4 /* sound_right_answer.mp3 */; };
 		2D1DD83F2B8F86C6005186A4 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */; };
+		2DF43EA22B8FD6CF0039F90E /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF43EA02B8FD6CF0039F90E /* Roboto-Regular.ttf */; };
+		2DF43EA32B8FD6CF0039F90E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF43EA12B8FD6CF0039F90E /* Constants.swift */; };
+		2DF43EA52B8FD6DD0039F90E /* ProgressViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF43EA42B8FD6DD0039F90E /* ProgressViewCell.swift */; };
+		2DF43EA72B8FD6E90039F90E /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF43EA62B8FD6E90039F90E /* ProgressViewController.swift */; };
 		6FE0D84B2B8E5BDD008C045E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */; };
-		D07300712B8FC892006D4D6B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07300702B8FC892006D4D6B /* Constants.swift */; };
-		D07300732B8FC8A2006D4D6B /* ProgressViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07300722B8FC8A2006D4D6B /* ProgressViewCell.swift */; };
-		D07300752B8FC8AB006D4D6B /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07300742B8FC8AB006D4D6B /* ProgressViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,11 +49,11 @@
 		2D1DD8362B8F8004005186A4 /* sound_decision_made.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_decision_made.mp3; sourceTree = "<group>"; };
 		2D1DD8372B8F8005005186A4 /* sound_right_answer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_right_answer.mp3; sourceTree = "<group>"; };
 		2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		2DF43EA02B8FD6CF0039F90E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		2DF43EA12B8FD6CF0039F90E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2DF43EA42B8FD6DD0039F90E /* ProgressViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewCell.swift; sourceTree = "<group>"; };
+		2DF43EA62B8FD6E90039F90E /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		D073006F2B8FC888006D4D6B /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../../../Users/the_god/Desktop/Who-Wants-to-Be-a-Millionaire/Who Wants to Be a Millionaire/Utilities/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		D07300702B8FC892006D4D6B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = "../../../../../../Users/the_god/Desktop/Who-Wants-to-Be-a-Millionaire/Who Wants to Be a Millionaire/Utilities/Constants.swift"; sourceTree = "<group>"; };
-		D07300722B8FC8A2006D4D6B /* ProgressViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressViewCell.swift; path = "../../../../../../Users/the_god/Desktop/Who-Wants-to-Be-a-Millionaire/Who Wants to Be a Millionaire/Views/ProgressViewCell.swift"; sourceTree = "<group>"; };
-		D07300742B8FC8AB006D4D6B /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressViewController.swift; path = "../../../../../../Users/the_god/Desktop/Who-Wants-to-Be-a-Millionaire/Who Wants to Be a Millionaire/Controllers/ProgressViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +127,7 @@
 		D073005D2B8E6A70006D4D6B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D07300742B8FC8AB006D4D6B /* ProgressViewController.swift */,
+				2DF43EA62B8FD6E90039F90E /* ProgressViewController.swift */,
 				2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */,
 				6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */,
 				2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */,
@@ -137,7 +138,7 @@
 		D07300632B8E6D0E006D4D6B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D07300722B8FC8A2006D4D6B /* ProgressViewCell.swift */,
+				2DF43EA42B8FD6DD0039F90E /* ProgressViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -145,8 +146,8 @@
 		D073006A2B8F4360006D4D6B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				D073006F2B8FC888006D4D6B /* Roboto-Regular.ttf */,
-				D07300702B8FC892006D4D6B /* Constants.swift */,
+				2DF43EA12B8FD6CF0039F90E /* Constants.swift */,
+				2DF43EA02B8FD6CF0039F90E /* Roboto-Regular.ttf */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -215,6 +216,7 @@
 			files = (
 				2D1DD8002B8CECF4005186A4 /* LaunchScreen.storyboard in Resources */,
 				2D1DD8392B8F8005005186A4 /* sound_game_starts.mp3 in Resources */,
+				2DF43EA22B8FD6CF0039F90E /* Roboto-Regular.ttf in Resources */,
 				2D1DD83C2B8F8005005186A4 /* sound_right_answer.mp3 in Resources */,
 				2D1DD83A2B8F8005005186A4 /* sound_wrong_answer.mp3 in Resources */,
 				2D1DD83B2B8F8005005186A4 /* sound_decision_made.mp3 in Resources */,
@@ -231,13 +233,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D1DD83F2B8F86C6005186A4 /* RulesViewController.swift in Sources */,
-				D07300712B8FC892006D4D6B /* Constants.swift in Sources */,
+				2DF43EA52B8FD6DD0039F90E /* ProgressViewCell.swift in Sources */,
 				2D1DD7F82B8CECF2005186A4 /* ViewController.swift in Sources */,
 				2D1DD7F42B8CECF1005186A4 /* AppDelegate.swift in Sources */,
-				D07300752B8FC8AB006D4D6B /* ProgressViewController.swift in Sources */,
+				2DF43EA72B8FD6E90039F90E /* ProgressViewController.swift in Sources */,
 				2D1DD80A2B8E12AA005186A4 /* HTMLResponse.swift in Sources */,
-				D07300732B8FC8A2006D4D6B /* ProgressViewCell.swift in Sources */,
 				2D1DD80E2B8E18C2005186A4 /* DataManager.swift in Sources */,
+				2DF43EA32B8FD6CF0039F90E /* Constants.swift in Sources */,
 				2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */,
 				2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */,
 				2D1DD7F62B8CECF2005186A4 /* SceneDelegate.swift in Sources */,

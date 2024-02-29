@@ -36,16 +36,16 @@ class StartGameViewController: UIViewController {
 }
 
 
-extension StartGameViewController: GameViewModelDelegate {
-    func showQuestion(_ question: Question) {
+extension StartGameViewController: GameDelegate {
+    func selectCurrectAnswer(_ correctAnswer: String) {
         
     }
     
-    func showCorrectAnswer(_ correctAnswer: String) {
+    func proceedToTheNextQuestion(_ question: Question, questionNumger: Int) {
         
     }
     
-    func endGame(withMessage message: String) {
+    func endGame(moneyWon: Int) {
         
     }
     
@@ -53,5 +53,16 @@ extension StartGameViewController: GameViewModelDelegate {
         
     }
     
+    func fiftyFiftyButtonTapped() {
+        
+    }
+    
+    func audienceHelpButtonTapped() {
+        
+    }
+    
+    func takeMoneyButtonTapped() {
+        
+    }
     
 }

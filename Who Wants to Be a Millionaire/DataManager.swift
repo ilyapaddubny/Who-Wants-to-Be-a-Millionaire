@@ -9,8 +9,8 @@ import Foundation
 
 enum QuestionLevel: String, CaseIterable {
     case easy = "https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple"
-    case medium = "https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple"
-    case hard = "https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple"
+//    case medium = "https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple"
+//    case hard = "https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple"
     
 }
 
@@ -22,7 +22,7 @@ class DataManager {
         let levels = QuestionLevel.allCases
         
         // Loop through each question level
-        for level in levels {
+        for (index, level) in levels.enumerated() {
             guard let url = URL(string: level.rawValue) else {
                 print("🔴 invalidURL")
                 completion(.failure(NetworkError.invalidURL))
@@ -39,7 +39,7 @@ class DataManager {
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
                     let response = response as? HTTPURLResponse
-                    print("🔴 \(response?.statusCode)")
+                    print("🔴 \(String(describing: response?.statusCode))")
                     completion(.failure(NetworkError.noData))
                     return
                 }
@@ -64,8 +64,11 @@ class DataManager {
                     completion(.success(self.questionsByLevel))
                 }
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6*Double(index)) {
+                print("ℹ️ task")
+                task.resume()
+            }
             
-            task.resume()
         }
     }
 }

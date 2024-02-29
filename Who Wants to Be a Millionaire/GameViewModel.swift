@@ -9,18 +9,31 @@ import Foundation
 import AVFoundation
 
 
-protocol GameViewModelDelegate: AnyObject {
-    func showQuestion(_ question: Question)
-    func showCorrectAnswer(_ correctAnswer: String)
-    func endGame(withMessage message: String)
+protocol GameDelegate: AnyObject {
+    func selectCurrectAnswer(_ correctAnswer: String)
+    func proceedToTheNextQuestion(_ question: Question, questionNumger: Int)
+    
+    
+    func endGame(moneyWon: Int)
     func updateTimerLabel(_ timeRemaining: Int)
+    
+    func fiftyFiftyButtonTapped()
+    func audienceHelpButtonTapped()
+    func takeMoneyButtonTapped()
 }
 
+protocol EndGameDelegate: AnyObject {
+    func endGame(moneyWon: Int)
+}
+
+
 class GameViewModel {
-    weak var delegate: GameViewModelDelegate?
-    let dataManager = DataManager()
-    private var audioPlayer: AVAudioPlayer?
+    weak var gameDelegate: GameDelegate? //QuestionViewController
+    weak var endGame: EndGameDelegate? //progress VC
     
+    let dataManager = DataManager()
+    
+    private var audioPlayer: AVAudioPlayer?
     
     private var questions: [Question] = []
     
@@ -29,25 +42,23 @@ class GameViewModel {
     private var timer: Timer?
     private var remainingTime = 30
     
-    private var totalEarnings = 0
-    
     private var hasFiftyFiftyUsed = false
     private var hasAudienceHelpUsed = false
     private var hasPhoneFriendUsed = false
     
-    init(delegate: GameViewModelDelegate) {
-        self.delegate = delegate
-        playWrongAnswerSound()
+    init(delegate: GameDelegate) {
+        gameDelegate = delegate
         loadQuestions()
     }
+    
     
     func loadQuestions() {
         dataManager.fetchDataOnline { [weak self] result in
             switch result {
             case .success(let questionsByLevel):
                 for (level, questions) in questionsByLevel {
-                    print("Questions for level \(level):")
                     self?.questions.append(contentsOf: questions)
+                    print(questions.count)
                 }
             case.failure(let error):
                 print("⚠️ Failed to load questions: \(error.localizedDescription)")
@@ -75,38 +86,81 @@ class GameViewModel {
     }
     
     
-    private func checkAnswer(_ selectedAnswer: String) {
-        // Проверка ответа пользователя
+    private func selectAnswer(_ selectedAnswer: String) {
+        //  answer is selected
+        playDecisionMadeSound()
+        
+        //TODO: подождать 3 секунды...
+        showCorrectAnswer()
+        
+        if selectedAnswer == questions[currentQuestionIndex].correctAnswer {
+            // answer is correct.
+            playCorrectAnswerSound()
+            currentQuestionIndex += 1
+            //TODO: подождать 2 секунды...
+            //TODO: если вопрос не последний - оповести делегат, о переходе к следующему вопросу:
+            gameDelegate?.proceedToTheNextQuestion(questions[currentQuestionIndex], questionNumger: currentQuestionIndex + 1)
+            //TODO: если вопрос был последний - надо проиграть звук победи и опосестить делегат об окончании игры с суммой выйгрыша = 1 миллион (делегат должен реализовать разделение логики, если сумма выигрыша не = 0)
+        } else {
+            // answer is wrong
+            if (0...4).contains(currentQuestionIndex) {
+                // user wins 0 USD
+                playWrongAnswerSound()
+                //TODO: подождать 2 секунды...
+                //TODO: опосестить делегат об окончании игры с суммой выйгрыша = 0 (делегат должен реализовать разделение логики, если сумма выигрыша = 0)
+            } else {
+                // user wins 0 USD
+                playWrongAnswerSound()
+                //TODO: подождать 2 секунды...
+                //TODO: выбрать нужную несгораемую сумму
+                //TODO: опосестить делегат об окончании игры с суммой выйгрыша = несгораемой сумме (делегат должен реализовать разделение логики, если сумма выигрыша не = 0)
+            }
+        }
+
     }
     
     private func showCorrectAnswer() {
         // Показать правильный ответ после ответа пользователя
+        gameDelegate?.selectCurrectAnswer(questions[currentQuestionIndex].correctAnswer)
     }
     
+    
+    // MARK: - Help buttons intents
     func fiftyFiftyButtonTapped() {
-        // Реализация подсказки "50/50"
-        // Удаление двух неверных ответов
-        hasFiftyFiftyUsed = true
+        if !hasFiftyFiftyUsed {
+            // Реализация подсказки "50/50"
+            // Удаление двух неверных ответов
+            
+            hasFiftyFiftyUsed = true
+        }
     }
     
     func audienceHelpButtonTapped() {
-        // Реализация подсказки "Помощь зала"
-        // Показать всплывающее уведомление с самым популярным ответом зала
-        hasAudienceHelpUsed = true
+        if !hasAudienceHelpUsed {
+            // Реализация подсказки "Помощь зала"
+            // Показать всплывающее уведомление с самым популярным ответом зала
+            
+            
+            hasAudienceHelpUsed = true
+        }
     }
     
     func phoneFriendButtonTapped() {
-        // Реализация подсказки "Звонок другу"
-        // Показать всплывающее уведомление с ответом от друга
-        hasPhoneFriendUsed = true
+        if !hasPhoneFriendUsed {
+            // Реализация подсказки "Звонок другу"
+            // Показать всплывающее уведомление с ответом от друга
+            
+            
+            hasPhoneFriendUsed = true
+        }
     }
     
     func takeMoneyButtonTapped() {
         // Реализация кнопки "Забрать деньги"
-        delegate?.endGame(withMessage: "Вы забрали \(totalEarnings) рублей")
+        
     }
     
-    //MARK: - Sounds
+    // MARK: - Sounds
     private func playGameStartsSound() {
         playSound("sound_game_starts")
     }
@@ -115,7 +169,7 @@ class GameViewModel {
         playSound("sound_decision_made")
     }
     
-     private func playRightAnswerSound() {
+     private func playCorrectAnswerSound() {
         playSound("sound_right_answer")
     }
     
