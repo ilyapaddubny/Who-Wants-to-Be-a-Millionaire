@@ -13,25 +13,25 @@ class StartGameViewController: UIViewController {
     let playButton = UIButton()
     let rulesButton = UIButton()
     let stackView = UIStackView()
-
+    
     private lazy var backgroundImageView: UIImageView = {
         let element = UIImageView()
         element.image = UIImage(named: "background_crowd")
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.insertSubview(backgroundImage, at: 0)
-//        view.backgroundColor = UIColor(UIImage(named: "background_crowd")!)
+        //        self.view.insertSubview(backgroundImage, at: 0)
+        //        view.backgroundColor = UIColor(UIImage(named: "background_crowd")!)
         view.addSubview(backgroundImageView)
         style()
         layout()
         
     }
-    }
-   
+}
+
 extension UIColor {
     static let myPurple = UIColor(_colorLiteralRed: 85/255, green: 20/255, blue: 95/255, alpha: 1)
 }
@@ -50,7 +50,7 @@ extension StartGameViewController {
         rulesButton.backgroundColor = .myPurple
         rulesButton.layer.cornerRadius = 10
         rulesButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-
+        
     }
     
     private func layout() {
@@ -61,9 +61,9 @@ extension StartGameViewController {
         stackView.addArrangedSubview(playButton)
         stackView.addArrangedSubview(rulesButton)
         view.addSubview(stackView)
-
+        
         NSLayoutConstraint.activate([
-
+            
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -73,7 +73,7 @@ extension StartGameViewController {
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -250),
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
-
+            
             playButton.heightAnchor.constraint(equalToConstant: 50),
             rulesButton.heightAnchor.constraint(equalToConstant: 50)
         ])
