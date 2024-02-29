@@ -20,6 +20,16 @@ class ProgressViewController: UIViewController {
         tv.register(ProgressViewCell.self, forCellReuseIdentifier: ProgressViewCell.identifier)
         return tv
     }()
+    
+    private let grabMoneyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Grab Money", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 25)
+        button.backgroundColor = UIColor(red: 172/255, green: 148/255, blue: 23/255, alpha: 1)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 2
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,23 +47,29 @@ extension ProgressViewController {
         
         view.addSubview(backgroundImage)
         view.addSubview(tableView)
+        view.addSubview(grabMoneyButton)
         
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        grabMoneyButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 34),
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 124),
             tableView.heightAnchor.constraint(equalToConstant: 632),
-            tableView.widthAnchor.constraint(equalToConstant: 321)
+            tableView.widthAnchor.constraint(equalToConstant: 321),
+            
+            grabMoneyButton.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            grabMoneyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 34),
+            grabMoneyButton.widthAnchor.constraint(equalToConstant: 321),
+            
         ])
+
+      
     }
 }
 
@@ -73,8 +89,6 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
             cell.questionImageView.image = Images.yellowLevel
           case 5, 10:
             cell.questionImageView.image = Images.blueLevel
-          case 14:
-            cell.questionImageView.image = Images.greenLevel
           default:
             cell.questionImageView.image = Images.purpleLevel
           }
