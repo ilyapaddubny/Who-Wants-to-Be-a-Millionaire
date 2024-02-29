@@ -74,7 +74,7 @@ extension ProgressViewCell {
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            contentView.heightAnchor.constraint(lessThanOrEqualToConstant: 38)
+            contentView.heightAnchor.constraint(lessThanOrEqualToConstant: 41)
         ])
 
     }
