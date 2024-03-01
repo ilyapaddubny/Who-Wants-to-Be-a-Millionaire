@@ -14,10 +14,19 @@ class QuestionViewController: UIViewController {
     
     // MARK: - UI
     
-    var questionNumber: Int = 1
-    var actualSum: Int = 564_000
+    var questionNumber = 1
+    var actualSum = 564_000
+    var viewModel: GameViewModel
     
+    init(viewModel: GameViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var backgroungImageView: UIImageView = {
         let element = UIImageView()
@@ -33,11 +42,11 @@ class QuestionViewController: UIViewController {
     
     private lazy var questionNumberLabel: UILabel = {
         let element = UILabel()
-        element.font = .systemFont(ofSize: 30)
+        element.font = .systemFont(ofSize: 24)
         element.textColor = .white
         element.textAlignment = .center
         element.numberOfLines = 0
-        element.text = "Вопрос \n\(questionNumber)"
+        
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -81,7 +90,6 @@ class QuestionViewController: UIViewController {
     
     private lazy var questLabel: UILabel = {
         let element = UILabel()
-        element.text = "Вопрос"
         element.font = .systemFont(ofSize: 22)
         element.textAlignment = .center
         element.textColor = .white
@@ -96,13 +104,9 @@ class QuestionViewController: UIViewController {
         let element = UIButton()
         element.setBackgroundImage(UIImage(named: "question_empty"), for: .normal)
         
-        let attributedTitle = NSMutableAttributedString(string: "A:  Вариант")
-        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
-        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
-        element.setAttributedTitle(attributedTitle, for: .normal)
         
         element.titleLabel?.font = UIFont.systemFont(ofSize: 22)
-        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 5)
+        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 5)
         element.contentHorizontalAlignment = .left
         
         element.addTarget(self, action: #selector(answerButtonTapped), for: .touchUpInside)
@@ -115,13 +119,8 @@ class QuestionViewController: UIViewController {
         let element = UIButton()
         element.setBackgroundImage(UIImage(named: "question_empty"), for: .normal)
         
-        let attributedTitle = NSMutableAttributedString(string: "B:  Вариант")
-        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
-        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
-        
-        element.setAttributedTitle(attributedTitle, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 22)
-        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 5)
+        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 5)
         element.contentHorizontalAlignment = .left
         
         element.addTarget(self, action: #selector(answerButtonTapped), for: .touchUpInside)
@@ -134,13 +133,8 @@ class QuestionViewController: UIViewController {
         let element = UIButton()
         element.setBackgroundImage(UIImage(named: "question_empty"), for: .normal)
         
-        let attributedTitle = NSMutableAttributedString(string: "C:  Вариант")
-        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
-        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
-        element.setAttributedTitle(attributedTitle, for: .normal)
-        
         element.titleLabel?.font = UIFont.systemFont(ofSize: 22)
-        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 5)
+        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 5)
         element.contentHorizontalAlignment = .left
         
         element.addTarget(self, action: #selector(answerButtonTapped), for: .touchUpInside)
@@ -153,13 +147,8 @@ class QuestionViewController: UIViewController {
         let element = UIButton()
         element.setBackgroundImage(UIImage(named: "question_empty"), for: .normal)
         
-        let attributedTitle = NSMutableAttributedString(string: "D:  Вариант")
-        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
-        attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
-        element.setAttributedTitle(attributedTitle, for: .normal)
-        
         element.titleLabel?.font = UIFont.systemFont(ofSize: 22)
-        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 5)
+        element.titleEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 5)
         element.contentHorizontalAlignment = .left
         
         element.addTarget(self, action: #selector(answerButtonTapped), for: .touchUpInside)
@@ -175,7 +164,7 @@ class QuestionViewController: UIViewController {
         element.setImage(UIImage(named: "help_50_50"), for: .normal)
         element.contentMode = .scaleAspectFit
         
-        element.addTarget(self, action: #selector(halfHelpButton), for: .touchUpInside)
+        element.addTarget(self, action: #selector(fiftyFiftyButtonTapped), for: .touchUpInside)
         
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -186,7 +175,7 @@ class QuestionViewController: UIViewController {
         element.setImage(UIImage(named: "help_friend"), for: .normal)
         element.contentMode = .scaleAspectFit
         
-        element.addTarget(self, action: #selector(callHelpButton), for: .touchUpInside)
+        element.addTarget(self, action: #selector(callFriendButtonTapped), for: .touchUpInside)
         
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -197,7 +186,7 @@ class QuestionViewController: UIViewController {
         element.setImage(UIImage(named: "help_audience"), for: .normal)
         element.contentMode = .scaleAspectFit
         
-        element.addTarget(self, action: #selector(friendHelpButton), for: .touchUpInside)
+        element.addTarget(self, action: #selector(audienceHelpButtonTapped), for: .touchUpInside)
         
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -208,43 +197,34 @@ class QuestionViewController: UIViewController {
     
    
     @objc func answerButtonTapped(_ sender: UIButton) {
-        print("He-he")
+        if let answer = sender.titleLabel?.text {
+            let trimmedAnswer = String(answer.suffix(from: answer.index(answer.startIndex, offsetBy: 3)))
+            print(trimmedAnswer)
+            viewModel.selectAnswer(trimmedAnswer)
+        }
         sender.setBackgroundImage(UIImage(named: "question_selected"), for: .normal)
     }
     
     
-    private var halfHelpButtonPressed = false
-    private var callHelpButtonPressed = false
-    private var friendHelpButtonPressed = false
     
-    @objc func halfHelpButton(_ sender: UIButton) {
-        if halfHelpButtonPressed == false {
-            print("1")
-            sender.setImage(UIImage(named: "help_50_50_crossed"), for: .normal)
-            halfHelpButtonPressed = true
-        }
+    @objc func fiftyFiftyButtonTapped(_ sender: UIButton) {
+        viewModel.fiftyFiftyButtonTapped()
     }
     
-    @objc func callHelpButton(_ sender: UIButton) {
-        if callHelpButtonPressed == false {
-            print("2")
-            sender.setImage(UIImage(named: "help_crossed"), for: .normal)
-            callHelpButtonPressed = true
-        }
+    @objc func callFriendButtonTapped(_ sender: UIButton) {
+        viewModel.callFriendButtonTapped()
     }
     
-    @objc func friendHelpButton(_ sender: UIButton) {
-        if friendHelpButtonPressed == false {
-            print("3")
-            sender.setImage(UIImage(named: "help_audience_crossed"), for: .normal)
-            friendHelpButtonPressed = true
-        }
+    @objc func audienceHelpButtonTapped(_ sender: UIButton) {
+        viewModel.audienceHelpButtonTapped()
+
     }
     
     // MARK: - Lyfe Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
         
         setView()
         setupConstraints()
@@ -305,6 +285,130 @@ class QuestionViewController: UIViewController {
         
     }
 }
+
+// MARK: - ViewModel Delegate
+// Created by Ilya Paddubny on 01.03.2024.
+extension QuestionViewController: GameDelegate {
+    func fiftyFiftyButtonUsed(wrongAnswer1: String, wrongAnswer2: String) {
+        deactiveteTwoButtonsWith(answer1: wrongAnswer1, answer2: wrongAnswer2)
+        halfHelp.setImage(UIImage(named: "help_50_50_crossed"), for: .normal)
+        halfHelp.isEnabled = false
+    }
+    
+    func audienceHelpButtonUsed(audienceAnswer: String) {
+        showAlertWith(title: "Friend's help results", message: audienceAnswer)
+        friendHelp.setImage(UIImage(named: "help_audience_crossed"), for: .normal)
+        friendHelp.isEnabled = false
+    }
+    
+    func callFriendButtonUsed(friendsAnswer: String) {
+        showAlertWith(title: "Audience help results", message: friendsAnswer)
+        callHelp.setImage(UIImage(named: "help_friend_crossed"), for: .normal)
+        callHelp.isEnabled = false
+    }
+    
+    func selectCurrectAnswer(_ correctAnswer: String) {
+        selectButtonWith(text: correctAnswer)
+    }
+    
+    func proceedToTheNextQuestion(_ question: Question, questionNumber: Int) {
+        let progressVC = ProgressViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(progressVC, animated: true)
+    }
+    
+    func onShowTheQuestion(_ question: Question, questionNumber: Int) {
+        
+        questionNumberLabel.text = "Question \n\(questionNumber)"
+        questLabel.text = "\(question.question)"
+        
+        var answers = question.incorrectAnswers
+        answers.append(question.correctAnswer)
+        
+        configureAnswerButtons(withQuestions: answers.shuffled())
+        
+        print(question.question)
+        print(questionNumber)
+    }
+    
+    func selectButtonWith(text: String) {
+        let answerButtons = [answerA, answerB, answerC, answerD]
+        
+        for button in answerButtons {
+            guard let buttonText = button.titleLabel?.text,
+                  buttonText.contains(text) else {
+                // If the button's text does not contain answer1 or answer2, skip to the next iteration
+                continue
+            }
+            
+            button.setBackgroundImage(UIImage(named: "question_right"), for: .normal)
+        }
+       
+        }
+    
+    func configureAnswerButtons(withQuestions questions: [String]) {
+        let answerButtons = [answerA, answerB, answerC, answerD]
+        
+        for (index, question) in questions.enumerated() {
+            guard index < answerButtons.count else {
+                break
+            }
+            
+            let button = answerButtons[index]
+            
+            let answerLetter = String(UnicodeScalar(65 + index)!)
+            let labeledQuestion = "\(answerLetter): \(question)"
+            
+            let attributedTitle = NSMutableAttributedString(string: labeledQuestion)
+            attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
+            attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
+            button.setAttributedTitle(attributedTitle, for: .normal)
+        }
+    }
+    
+    func endGame(moneyWon: Int) {
+        print("Game ended - \(moneyWon)")
+        if moneyWon == 0 {
+//            let progressVC = ProgressViewController(viewModel: viewModel)
+            self.navigationController?.pushViewController(StartGameViewController(), animated: true)
+        } else {
+            ProgressViewController(viewModel: viewModel)
+        }
+    }
+    
+    func updateTimerLabel(_ timeRemaining: Int) {
+        
+    }
+    
+    func takeMoneyButtonTapped() {
+        
+    }
+    
+    func deactiveteTwoButtonsWith(answer1: String, answer2: String) {
+        
+        let answerButtons = [answerA, answerB, answerC, answerD]
+        
+        for button in answerButtons {
+            guard let buttonText = button.titleLabel?.text,
+                  buttonText.contains(answer1) || buttonText.contains(answer2) else {
+                // If the button's text does not contain answer1 or answer2, skip to the next iteration
+                continue
+            }
+            
+            button.setBackgroundImage(UIImage(named: "question_no_option"), for: .normal)
+            button.isEnabled = false
+            button.titleLabel?.text = ""
+
+        }
+    }
+    
+    func showAlertWith(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+           alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           present(alertController, animated: true, completion: nil)
+    }
+    
+}
+
 
 // MARK: - Setup constraints
 

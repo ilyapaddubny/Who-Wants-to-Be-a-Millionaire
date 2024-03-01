@@ -4,6 +4,7 @@ import UIKit
 
 
 class ProgressViewController: UIViewController {
+    let viewModel: GameViewModel
     let questions = (1...15).reversed().map { "Question \($0)" }
     var amountOfMoney = ["1000000 USD", "500000 USD", "250000 USD", "125000 USD", "64000 USD", "32000 USD", "16000 USD", "8000 USD", "4000 USD", "2000 USD", "1000 USD", "500 USD", "300 USD", "200 USD", "100 USD"]
 
@@ -24,28 +25,36 @@ class ProgressViewController: UIViewController {
     private let grabMoneyButton: UIButton = {
         let button = UIButton()
         button.setTitle("TAKE THE MONEY", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 18)
-        button.backgroundColor = UIColor(red: 172/255, green: 148/255, blue: 23/255, alpha: 1)
+        button.backgroundColor = .myPurple
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 10
         return button
     }()
     
     private let continueButton: UIButton = {
         let button = UIButton()
         button.setTitle("CONTINUE THE GAME", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 18)
+        button.backgroundColor = .myPurple
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         button.titleLabel?.numberOfLines = 0
-        button.backgroundColor = .blue
         button.layer.cornerRadius = 15
-        button.layer.borderWidth = 2
         return button
     }()
-
+    
+    init(viewModel: GameViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
         setupUI()
         
     }

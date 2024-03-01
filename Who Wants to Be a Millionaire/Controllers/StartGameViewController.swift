@@ -23,13 +23,30 @@ class StartGameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.view.insertSubview(backgroundImage, at: 0)
-        //        view.backgroundColor = UIColor(UIImage(named: "background_crowd")!)
+        navigationItem.hidesBackButton = true
         view.addSubview(backgroundImageView)
         style()
         layout()
         
+        // Add target action to play button
+        playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+        
+        rulesButton.addTarget(self, action: #selector(rulesButtonTapped), for: .touchUpInside)
     }
+    
+    @objc private func playButtonTapped() {
+        
+        let gameViewModel = GameViewModel() // Assuming you have a GameViewModel initializer
+        let gameVC = QuestionViewController(viewModel: gameViewModel)
+        gameViewModel.gameDelegate = gameVC
+        gameViewModel.startGame()
+        self.navigationController?.pushViewController(gameVC, animated: true)
+    }
+    
+    @objc private func rulesButtonTapped() {
+        self.navigationController?.pushViewController(RulesViewController(), animated: true)
+    }
+    
 }
 
 extension UIColor {
@@ -41,12 +58,12 @@ extension StartGameViewController {
         logo.image = UIImage(named: "logo.png")
         logo.contentMode = .scaleAspectFit
         
-        playButton.setTitle("Начать игру", for: .normal)
+        playButton.setTitle("Start the game!", for: .normal)
         playButton.backgroundColor = .myPurple
         playButton.layer.cornerRadius = 10
         playButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         
-        rulesButton.setTitle("Правила игры", for: .normal)
+        rulesButton.setTitle("Rules", for: .normal)
         rulesButton.backgroundColor = .myPurple
         rulesButton.layer.cornerRadius = 10
         rulesButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -80,33 +97,3 @@ extension StartGameViewController {
     }
 }
 
-extension StartGameViewController: GameDelegate {
-    func selectCurrectAnswer(_ correctAnswer: String) {
-        
-    }
-    
-    func proceedToTheNextQuestion(_ question: Question, questionNumger: Int) {
-        
-    }
-    
-    func endGame(moneyWon: Int) {
-        
-    }
-    
-    func updateTimerLabel(_ timeRemaining: Int) {
-        
-    }
-    
-    func fiftyFiftyButtonTapped() {
-        
-    }
-    
-    func audienceHelpButtonTapped() {
-        
-    }
-    
-    func takeMoneyButtonTapped() {
-        
-    }
-    
-}

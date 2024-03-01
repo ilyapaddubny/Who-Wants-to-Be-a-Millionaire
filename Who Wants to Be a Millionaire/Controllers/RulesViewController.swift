@@ -11,6 +11,8 @@ class RulesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.hidesBackButton = true
         configureRulesVC()
     }
     
@@ -59,8 +61,7 @@ class RulesViewController: UIViewController {
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         button.setTitle("Back to main", for: .normal)
-        button.setTitleColor(UIColor(red: 255/255, green: 236/255, blue: 156/255, alpha: 1), for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
