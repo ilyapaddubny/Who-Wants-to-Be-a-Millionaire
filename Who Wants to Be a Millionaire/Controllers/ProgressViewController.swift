@@ -23,9 +23,22 @@ class ProgressViewController: UIViewController {
     
     private let grabMoneyButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Grab Money", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 25)
+        button.setTitle("TAKE THE MONEY", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 18)
         button.backgroundColor = UIColor(red: 172/255, green: 148/255, blue: 23/255, alpha: 1)
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.textAlignment = .center
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 2
+        return button
+    }()
+    
+    private let continueButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("CONTINUE THE GAME", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 18)
+        button.titleLabel?.numberOfLines = 0
+        button.backgroundColor = .blue
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 2
         return button
@@ -48,10 +61,12 @@ extension ProgressViewController {
         view.addSubview(backgroundImage)
         view.addSubview(tableView)
         view.addSubview(grabMoneyButton)
+        view.addSubview(continueButton)
         
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         grabMoneyButton.translatesAutoresizingMaskIntoConstraints = false
+        continueButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -64,9 +79,14 @@ extension ProgressViewController {
             tableView.widthAnchor.constraint(equalToConstant: 321),
             
             grabMoneyButton.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            grabMoneyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 34),
-            grabMoneyButton.widthAnchor.constraint(equalToConstant: 321),
-            
+                   grabMoneyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 34),
+                   grabMoneyButton.widthAnchor.constraint(equalTo: tableView.widthAnchor, multiplier: 0.5, constant: -17),
+            grabMoneyButton.heightAnchor.constraint(equalToConstant: 54),
+     
+            continueButton.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            continueButton.leadingAnchor.constraint(equalTo: grabMoneyButton.trailingAnchor, constant: 34),
+            continueButton.widthAnchor.constraint(equalTo: tableView.widthAnchor, multiplier: 0.5, constant: -17),
+            continueButton.heightAnchor.constraint(equalToConstant: 54),
         ])
 
       
