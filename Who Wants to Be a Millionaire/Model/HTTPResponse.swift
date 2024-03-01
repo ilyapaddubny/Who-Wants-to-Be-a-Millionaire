@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HTMLResponse: Codable {
+struct HTTPResponse: Codable {
     let responseCode: Int
     let results: [Question]
 

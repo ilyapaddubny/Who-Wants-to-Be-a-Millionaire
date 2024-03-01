@@ -15,3 +15,12 @@ enum Images {
     static let greenLevel = UIImage(named: "question_level_green")
     static let purpleLevel = UIImage(named: "question_level_purple")
 }
+
+
+enum SoundsNames {
+    static let decisionMade = "sound_decision_made"
+    static let startOfGame = "sound_game_starts"
+    static let correctAnswer = "sound_right_answer"
+    static let timeTicking = "sound_time_ticking"
+    static let wrongAnswer = "sound_wrong_answer"
+}

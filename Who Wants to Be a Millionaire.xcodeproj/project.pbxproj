@@ -13,7 +13,7 @@
 		2D1DD7FD2B8CECF4005186A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD7FC2B8CECF4005186A4 /* Assets.xcassets */; };
 		2D1DD8002B8CECF4005186A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD7FE2B8CECF4005186A4 /* LaunchScreen.storyboard */; };
 		2D1DD8082B8CF1DE005186A4 /* StartGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */; };
-		2D1DD80A2B8E12AA005186A4 /* HTMLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8092B8E12AA005186A4 /* HTMLResponse.swift */; };
+		2D1DD80A2B8E12AA005186A4 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8092B8E12AA005186A4 /* HTTPResponse.swift */; };
 		2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD80B2B8E12F2005186A4 /* Question.swift */; };
 		2D1DD80E2B8E18C2005186A4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD80D2B8E18C2005186A4 /* DataManager.swift */; };
 		2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD8102B8E2013005186A4 /* GameViewModel.swift */; };
@@ -28,6 +28,8 @@
 		D05D22F02B90A4CB0099D5FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22EF2B90A4CB0099D5FA /* Constants.swift */; };
 		D05D22F22B90A4E20099D5FA /* ProgressViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22F12B90A4E20099D5FA /* ProgressViewCell.swift */; };
 		D05D22F42B90A4F40099D5FA /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22F32B90A4F40099D5FA /* ProgressViewController.swift */; };
+		D05D22F62B9124380099D5FA /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22F52B9124380099D5FA /* SoundManager.swift */; };
+		D05D22F82B9134270099D5FA /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22F72B9134270099D5FA /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +41,7 @@
 		2D1DD7FF2B8CECF4005186A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D1DD8012B8CECF4005186A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
-		2D1DD8092B8E12AA005186A4 /* HTMLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLResponse.swift; sourceTree = "<group>"; };
+		2D1DD8092B8E12AA005186A4 /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 		2D1DD80B2B8E12F2005186A4 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		2D1DD80D2B8E18C2005186A4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2D1DD8102B8E2013005186A4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
@@ -54,6 +56,8 @@
 		D05D22EF2B90A4CB0099D5FA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D05D22F12B90A4E20099D5FA /* ProgressViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewCell.swift; sourceTree = "<group>"; };
 		D05D22F32B90A4F40099D5FA /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		D05D22F52B9124380099D5FA /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		D05D22F72B9134270099D5FA /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				2D1DD80B2B8E12F2005186A4 /* Question.swift */,
-				2D1DD8092B8E12AA005186A4 /* HTMLResponse.swift */,
+				2D1DD8092B8E12AA005186A4 /* HTTPResponse.swift */,
+				D05D22F52B9124380099D5FA /* SoundManager.swift */,
+				D05D22F72B9134270099D5FA /* MainViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,7 +243,9 @@
 				2D1DD7F82B8CECF2005186A4 /* ViewController.swift in Sources */,
 				2D1DD7F42B8CECF1005186A4 /* AppDelegate.swift in Sources */,
 				D05D22F42B90A4F40099D5FA /* ProgressViewController.swift in Sources */,
-				2D1DD80A2B8E12AA005186A4 /* HTMLResponse.swift in Sources */,
+				D05D22F82B9134270099D5FA /* MainViewModel.swift in Sources */,
+				D05D22F62B9124380099D5FA /* SoundManager.swift in Sources */,
+				2D1DD80A2B8E12AA005186A4 /* HTTPResponse.swift in Sources */,
 				2D1DD80E2B8E18C2005186A4 /* DataManager.swift in Sources */,
 				D05D22F02B90A4CB0099D5FA /* Constants.swift in Sources */,
 				2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */,

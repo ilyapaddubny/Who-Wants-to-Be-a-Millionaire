@@ -8,12 +8,16 @@
 import UIKit
 
 
+
+
 class QuestionViewController: UIViewController {
     
     // MARK: - UI
     
     var questionNumber: Int = 1
     var actualSum: Int = 564_000
+    
+    
     
     private lazy var backgroungImageView: UIImageView = {
         let element = UIImageView()
@@ -200,7 +204,9 @@ class QuestionViewController: UIViewController {
     }()
     
     // MARK: - Logic
+
     
+   
     @objc func answerButtonTapped(_ sender: UIButton) {
         print("He-he")
         sender.setBackgroundImage(UIImage(named: "question_selected"), for: .normal)
