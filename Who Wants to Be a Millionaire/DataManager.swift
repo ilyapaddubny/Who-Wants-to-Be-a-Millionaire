@@ -50,7 +50,7 @@ class DataManager {
                     return
                 }
                 
-                guard let response = try? JSONDecoder().decode(HTMLResponse.self, from: jsonData) else {
+                guard let response = try? JSONDecoder().decode(HTTPResponse.self, from: jsonData) else {
                     print("🔴 Failed to decode questions data")
                     completion(.failure(NetworkError.decodingError))
                     return
