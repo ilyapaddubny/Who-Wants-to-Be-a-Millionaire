@@ -60,7 +60,7 @@ extension ProgressViewCell {
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             questionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            questionLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            questionLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 2),
             questionLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountOfMoneyLabel.leadingAnchor, constant: -10)
         ])
 
@@ -68,7 +68,7 @@ extension ProgressViewCell {
         amountOfMoneyLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             amountOfMoneyLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            amountOfMoneyLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            amountOfMoneyLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 2)
         ])
 
         

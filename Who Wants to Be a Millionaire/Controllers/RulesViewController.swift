@@ -8,9 +8,22 @@
 import UIKit
 
 class RulesViewController: UIViewController {
-
+    let gameViewModel: GameViewModel
+    
+    init(gameViewModel: GameViewModel) {
+        self.gameViewModel = gameViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.hidesBackButton = true
         configureRulesVC()
     }
     
@@ -59,14 +72,12 @@ class RulesViewController: UIViewController {
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         button.setTitle("Back to main", for: .normal)
-        button.setTitleColor(UIColor(red: 255/255, green: 236/255, blue: 156/255, alpha: 1), for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     
     @objc func buttonTapped() {
-        let startVC = StartGameViewController()
-        navigationController?.pushViewController(startVC, animated: true)
+        self.navigationController?.pushViewController(StartGameViewController(gameViewModel: gameViewModel), animated: true)
     }
 }

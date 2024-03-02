@@ -9,105 +9,189 @@ import Foundation
 import AVFoundation
 
 
-protocol GameViewModelDelegate: AnyObject {
-    func showQuestion(_ question: Question)
-    func showCorrectAnswer(_ correctAnswer: String)
-    func endGame(withMessage message: String)
-    func updateTimerLabel(_ timeRemaining: Int)
+protocol GameDelegate: AnyObject {
+    func selectCurrectAnswer(_ correctAnswer: String)
+    func proceedToTheNextQuestion(_ question: Question, questionNumber: Int)
+    func onShowTheQuestion(_ question: Question, questionNumber: Int)
+    
+    func endGame(moneyWon: Int)
+    
+    func fiftyFiftyButtonUsed(wrongAnswer1: String, wrongAnswer2: String)
+    func audienceHelpButtonUsed(audienceAnswer: String)
+    func callFriendButtonUsed(friendsAnswer: String)
+    
 }
 
+
 class GameViewModel {
-    weak var delegate: GameViewModelDelegate?
-    let dataManager = DataManager()
-    private var audioPlayer: AVAudioPlayer?
+    weak var gameDelegate: GameDelegate? //QuestionViewController
     
+    let dataManager = DataManager()
+    var helpButtonsInactive = false
+    private var audioPlayer: AVAudioPlayer?
     
     private var questions: [Question] = []
     
     private var currentQuestionIndex = 0
     
-    private var timer: Timer?
-    private var remainingTime = 30
+    var hasFiftyFiftyUsed = false
+    var hasAudienceHelpUsed = false
+    var hasFriendCallUsed = false
     
-    private var totalEarnings = 0
-    
-    private var hasFiftyFiftyUsed = false
-    private var hasAudienceHelpUsed = false
-    private var hasPhoneFriendUsed = false
-    
-    init(delegate: GameViewModelDelegate) {
-        self.delegate = delegate
-        playWrongAnswerSound()
+    init() {
         loadQuestions()
     }
     
+    
     func loadQuestions() {
-        dataManager.fetchDataOnline { [weak self] result in
+        dataManager.fetchDataOnline(questionsByLevel: .easy, completion: { [weak self] result in
             switch result {
-            case .success(let questionsByLevel):
-                for (level, questions) in questionsByLevel {
-                    print("Questions for level \(level):")
-                    self?.questions.append(contentsOf: questions)
-                }
-            case.failure(let error):
+            case .success(let questions):
+                print("⚠️ \(questions)")
+                self?.questions = questions
+            case .failure(let error):
                 print("⚠️ Failed to load questions: \(error.localizedDescription)")
-
+            }
+        })
+    }
+    
+    func getCurrectAnswer() -> String {
+        questions[currentQuestionIndex].correctAnswer
+    }
+    
+    func startGame() {
+        playTimeTickingSound()
+        helpButtonsInactive = false
+        currentQuestionIndex = 0
+        gameDelegate?.onShowTheQuestion(questions[currentQuestionIndex], questionNumber: currentQuestionIndex+1)
+    }
+    
+    func goToNextQuestion() {
+        currentQuestionIndex += 1
+        playTimeTickingSound()
+        gameDelegate?.onShowTheQuestion(questions[currentQuestionIndex], questionNumber: currentQuestionIndex)
+    }
+    
+    func getQuestionNumber() -> Int {
+        currentQuestionIndex + 1
+    }
+    
+    
+    func selectAnswer(_ selectedAnswer: String) {
+        //  answer is selected
+        playDecisionMadeSound()
+        print("ℹ️ \(currentQuestionIndex)")
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.timeAfterAnswer) {
+            // After 3 seconds, show the correct answer
+            self.showCorrectAnswer()
+            self.helpButtonsInactive = false
+            
+            if selectedAnswer == self.questions[self.currentQuestionIndex].correctAnswer {
+                // answer is correct.
+                self.currectAnswerLogic()
+                
+            } else {
+                // answer is wrong
+                self.wrongAnswerLogic()
+                
             }
         }
     }
     
-    
-    func startGame() {
-        // Начало игры
+    private func currectAnswerLogic() {
+        self.playCorrectAnswerSound()
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.timeAfterAnswer) {
+            if self.currentQuestionIndex == 14 {
+                //если вопрос был последний - надо проиграть звук победи и опосестить делегат об окончании игры с суммой выйгрыша = 1 миллион
+                self.playGameWinningSound()
+                self.gameDelegate?.endGame(moneyWon: 1_000_000)
+            } else {
+                //если вопрос не последний - оповести делегат, о переходе к следующему вопросу:
+                self.gameDelegate?.proceedToTheNextQuestion(self.questions[self.currentQuestionIndex], questionNumber: self.currentQuestionIndex)
+            }
+        }
     }
     
-    private func displayQuestion() {
-        // Отображение вопроса и вариантов ответов
-    }
-    
-    
-    private func startTimer() {
-        // Запуск таймера
-    }
-    
-    private func stopTimer() {
-        // Остановка таймера
-    }
-    
-    
-    private func checkAnswer(_ selectedAnswer: String) {
-        // Проверка ответа пользователя
+    private func wrongAnswerLogic() {
+        self.playWrongAnswerSound()
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.timeAfterAnswer) {
+            //опосестить делегат об окончании игры с суммой выйгрыша = 0 (делегат должен реализовать разделение логики, если сумма выигрыша = 0)
+            switch self.currentQuestionIndex {
+            case 0...5:
+                self.gameDelegate?.endGame(moneyWon: 0)
+            case 6...10:
+                self.gameDelegate?.endGame(moneyWon: 1000)
+            case 11..<15:
+                self.gameDelegate?.endGame(moneyWon: 32000)
+            default:
+                print("Answer is not within the specified ranges")
+            }
+            
+            self.stopMusic()
+        }
     }
     
     private func showCorrectAnswer() {
         // Показать правильный ответ после ответа пользователя
+        gameDelegate?.selectCurrectAnswer(questions[currentQuestionIndex].correctAnswer)
     }
     
+    
+    // MARK: - Help buttons intents
     func fiftyFiftyButtonTapped() {
-        // Реализация подсказки "50/50"
-        // Удаление двух неверных ответов
-        hasFiftyFiftyUsed = true
+        if !hasFiftyFiftyUsed, !helpButtonsInactive {
+            print("fiftyFiftyButtonTapped")
+            // Реализация подсказки "50/50"
+            // Удаление двух неверных ответов
+            gameDelegate?.fiftyFiftyButtonUsed(wrongAnswer1: questions[currentQuestionIndex].incorrectAnswers[0], wrongAnswer2: questions[currentQuestionIndex].incorrectAnswers[1])
+            hasFiftyFiftyUsed = true
+            helpButtonsInactive = true
+        }
     }
     
     func audienceHelpButtonTapped() {
-        // Реализация подсказки "Помощь зала"
-        // Показать всплывающее уведомление с самым популярным ответом зала
-        hasAudienceHelpUsed = true
+        if !hasAudienceHelpUsed, !helpButtonsInactive {
+            print("audienceHelpButtonTapped")
+            // Зал должен ответить на вопрос правильно с вероятностью 70%
+            
+            let audienceAnswer = getBoolWithProbability(of: 70) ? questions[currentQuestionIndex].correctAnswer : questions[currentQuestionIndex].incorrectAnswers.first
+            
+            gameDelegate?.audienceHelpButtonUsed(audienceAnswer: audienceAnswer ?? "No answer")
+            
+            hasAudienceHelpUsed = true
+            helpButtonsInactive = true
+        }
     }
     
-    func phoneFriendButtonTapped() {
-        // Реализация подсказки "Звонок другу"
-        // Показать всплывающее уведомление с ответом от друга
-        hasPhoneFriendUsed = true
+    
+    func callFriendButtonTapped() {
+        if !hasFriendCallUsed, !helpButtonsInactive {
+            print("phoneFriendButtonTapped")
+            // Звонок другу с вероятностью 80% даст правильный ответ
+            
+            let friendsAnswer = getBoolWithProbability(of: 80) ? questions[currentQuestionIndex].correctAnswer : questions[currentQuestionIndex].incorrectAnswers.first
+            
+            gameDelegate?.callFriendButtonUsed(friendsAnswer: friendsAnswer ?? "No answer")
+            
+            hasFriendCallUsed = true
+            helpButtonsInactive = true
+        }
     }
     
-    func takeMoneyButtonTapped() {
-        // Реализация кнопки "Забрать деньги"
-        delegate?.endGame(withMessage: "Вы забрали \(totalEarnings) рублей")
+    func getBoolWithProbability(of percent: Int) -> Bool {
+        // Generate a random number between 0 and 99
+        let randomNumber = Int.random(in: 0...percent)
+        
+        // Probability of 80%
+        if randomNumber < 80 {
+            return true
+        } else {
+            return false
+        }
     }
     
-    //MARK: - Sounds
-    private func playGameStartsSound() {
+    // MARK: - Sounds
+    private func playGameWinningSound() {
         playSound("sound_game_starts")
     }
     
@@ -115,7 +199,7 @@ class GameViewModel {
         playSound("sound_decision_made")
     }
     
-     private func playRightAnswerSound() {
+    private func playCorrectAnswerSound() {
         playSound("sound_right_answer")
     }
     
@@ -140,6 +224,15 @@ class GameViewModel {
         } catch {
             print("Error playing sound: \(error.localizedDescription)")
         }
+    }
+    
+    func stopMusic() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
+    
+    private struct Constants {
+        static let timeAfterAnswer: TimeInterval = 3
     }
     
     

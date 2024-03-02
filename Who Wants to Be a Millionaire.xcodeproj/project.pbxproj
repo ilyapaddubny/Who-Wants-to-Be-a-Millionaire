@@ -23,8 +23,10 @@
 		2D1DD83B2B8F8005005186A4 /* sound_decision_made.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8362B8F8004005186A4 /* sound_decision_made.mp3 */; };
 		2D1DD83C2B8F8005005186A4 /* sound_right_answer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8372B8F8005005186A4 /* sound_right_answer.mp3 */; };
 		2D1DD83F2B8F86C6005186A4 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */; };
+		2D2E0D6F2B90FD6E002A08B0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D2E0D6E2B90FD6E002A08B0 /* Roboto-Regular.ttf */; };
+		2F36AAF32B93425F00DD45BF /* VoteAudienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36AAF22B93425F00DD45BF /* VoteAudienceViewController.swift */; };
+		2F36AAF52B93430600DD45BF /* VotingGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36AAF42B93430600DD45BF /* VotingGraphView.swift */; };
 		6FE0D84B2B8E5BDD008C045E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */; };
-		D05D22EE2B90A4A90099D5FA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D05D22ED2B90A4A90099D5FA /* Roboto-Regular.ttf */; };
 		D05D22F02B90A4CB0099D5FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22EF2B90A4CB0099D5FA /* Constants.swift */; };
 		D05D22F22B90A4E20099D5FA /* ProgressViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22F12B90A4E20099D5FA /* ProgressViewCell.swift */; };
 		D05D22F42B90A4F40099D5FA /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22F32B90A4F40099D5FA /* ProgressViewController.swift */; };
@@ -51,8 +53,10 @@
 		2D1DD8362B8F8004005186A4 /* sound_decision_made.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_decision_made.mp3; sourceTree = "<group>"; };
 		2D1DD8372B8F8005005186A4 /* sound_right_answer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_right_answer.mp3; sourceTree = "<group>"; };
 		2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		2D2E0D6E2B90FD6E002A08B0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		2F36AAF22B93425F00DD45BF /* VoteAudienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteAudienceViewController.swift; sourceTree = "<group>"; };
+		2F36AAF42B93430600DD45BF /* VotingGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingGraphView.swift; sourceTree = "<group>"; };
 		6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		D05D22ED2B90A4A90099D5FA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../../etc/roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		D05D22EF2B90A4CB0099D5FA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D05D22F12B90A4E20099D5FA /* ProgressViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewCell.swift; sourceTree = "<group>"; };
 		D05D22F32B90A4F40099D5FA /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */,
 				6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */,
 				2D1DD8072B8CF1DE005186A4 /* StartGameViewController.swift */,
+				2F36AAF22B93425F00DD45BF /* VoteAudienceViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				D05D22F12B90A4E20099D5FA /* ProgressViewCell.swift */,
+				2F36AAF42B93430600DD45BF /* VotingGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,7 +158,7 @@
 		D073006A2B8F4360006D4D6B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				D05D22ED2B90A4A90099D5FA /* Roboto-Regular.ttf */,
+				2D2E0D6E2B90FD6E002A08B0 /* Roboto-Regular.ttf */,
 				D05D22EF2B90A4CB0099D5FA /* Constants.swift */,
 			);
 			path = Utilities;
@@ -222,10 +228,10 @@
 			files = (
 				2D1DD8002B8CECF4005186A4 /* LaunchScreen.storyboard in Resources */,
 				2D1DD8392B8F8005005186A4 /* sound_game_starts.mp3 in Resources */,
-				D05D22EE2B90A4A90099D5FA /* Roboto-Regular.ttf in Resources */,
 				2D1DD83C2B8F8005005186A4 /* sound_right_answer.mp3 in Resources */,
 				2D1DD83A2B8F8005005186A4 /* sound_wrong_answer.mp3 in Resources */,
 				2D1DD83B2B8F8005005186A4 /* sound_decision_made.mp3 in Resources */,
+				2D2E0D6F2B90FD6E002A08B0 /* Roboto-Regular.ttf in Resources */,
 				2D1DD8382B8F8005005186A4 /* sound_time_ticking.mp3 in Resources */,
 				2D1DD7FD2B8CECF4005186A4 /* Assets.xcassets in Resources */,
 			);
@@ -250,6 +256,8 @@
 				D05D22F02B90A4CB0099D5FA /* Constants.swift in Sources */,
 				2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */,
 				2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */,
+				2F36AAF32B93425F00DD45BF /* VoteAudienceViewController.swift in Sources */,
+				2F36AAF52B93430600DD45BF /* VotingGraphView.swift in Sources */,
 				2D1DD7F62B8CECF2005186A4 /* SceneDelegate.swift in Sources */,
 				2D1DD8082B8CF1DE005186A4 /* StartGameViewController.swift in Sources */,
 				6FE0D84B2B8E5BDD008C045E /* QuestionViewController.swift in Sources */,
