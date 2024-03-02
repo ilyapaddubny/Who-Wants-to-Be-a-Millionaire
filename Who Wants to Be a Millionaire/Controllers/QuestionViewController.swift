@@ -406,7 +406,7 @@ extension QuestionViewController: GameDelegate {
         actualSumLabel.text = "\(amountOfMoneyInInts[viewModel.getQuestionNumber()-1])USD"
         
         if let decodedString = question.question.htmlDecoded {
-            questLabel.text = "\(question.question)"
+            questLabel.text = "\(decodedString)"
         }
        
         
@@ -567,5 +567,26 @@ extension UIStackView {
         self.spacing = 0
         self.alignment = .fill
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+
+
+extension String {
+    var htmlDecoded: String? {
+        guard let data = data(using: .utf8) else {
+            return nil
+        }
+        let attributedOptions: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        do {
+            let attributedString = try NSAttributedString(data: data, options: attributedOptions, documentAttributes: nil)
+            return attributedString.string
+        } catch {
+            print("Error decoding HTML string: \(error)")
+            return nil
+        }
     }
 }
