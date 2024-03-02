@@ -232,7 +232,7 @@ class GameViewModel {
     }
     
     private struct Constants {
-        static let timeAfterAnswer: TimeInterval = 1
+        static let timeAfterAnswer: TimeInterval = 3
     }
     
     
