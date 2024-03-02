@@ -24,3 +24,16 @@ enum SoundsNames {
     static let timeTicking = "sound_time_ticking"
     static let wrongAnswer = "sound_wrong_answer"
 }
+
+
+enum QuestionLevel: String, CaseIterable {
+    case easy = "https://opentdb.com/api.php?amount=15&difficulty=easy&type=multiple"
+    case medium = "https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple"
+    case hard = "https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple"
+    
+}
+
+
+
+
+

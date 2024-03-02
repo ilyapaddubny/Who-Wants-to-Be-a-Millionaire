@@ -7,69 +7,50 @@
 
 import Foundation
 
-enum QuestionLevel: String, CaseIterable {
-    case easy = "https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple"
-//    case medium = "https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple"
-//    case hard = "https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple"
-    
-}
+
 
 class DataManager {
-    var questionsByLevel: [QuestionLevel: [Question]] = [:]
-    var completedCalls = 0
-    
-    func fetchDataOnline(completion: @escaping (Result<[QuestionLevel: [Question]], Error>) -> Void) {
+    func fetchDataOnline(questionsByLevel: QuestionLevel, completion: @escaping (Result<[Question], Error>) -> Void) {
         let levels = QuestionLevel.allCases
         
         // Loop through each question level
-        for (index, level) in levels.enumerated() {
-            guard let url = URL(string: level.rawValue) else {
-                print("🔴 invalidURL")
-                completion(.failure(NetworkError.invalidURL))
+        guard let url = URL(string: questionsByLevel.rawValue) else {
+            print("🔴 invalidURL")
+            completion(.failure(NetworkError.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("🔴 \(error.localizedDescription)")
+                completion(.failure(NetworkError.noData))
                 return
             }
             
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                if let error = error {
-                    print("🔴 \(error.localizedDescription)")
-                    completion(.failure(NetworkError.noData))
-                    return
-                }
-                
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    let response = response as? HTTPURLResponse
-                    print("🔴 \(String(describing: response?.statusCode))")
-                    completion(.failure(NetworkError.noData))
-                    return
-                }
-                
-                guard let jsonData = data else {
-                    print("🔴 No data received")
-                    completion(.failure(NetworkError.noData))
-                    return
-                }
-                
-                guard let response = try? JSONDecoder().decode(HTTPResponse.self, from: jsonData) else {
-                    print("🔴 Failed to decode questions data")
-                    completion(.failure(NetworkError.decodingError))
-                    return
-                }
-                
-                self.questionsByLevel[level] = response.results
-                self.completedCalls += 1
-                
-                // Check if all API calls have completed
-                if self.completedCalls == levels.count {
-                    completion(.success(self.questionsByLevel))
-                }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6*Double(index)) {
-                print("ℹ️ task")
-                task.resume()
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                let response = response as? HTTPURLResponse
+                print("🔴 \(String(describing: response?.statusCode))")
+                completion(.failure(NetworkError.noData))
+                return
             }
             
+            guard let jsonData = data else {
+                print("🔴 No data received")
+                completion(.failure(NetworkError.noData))
+                return
+            }
+            
+            guard let response = try? JSONDecoder().decode(HTTPResponse.self, from: jsonData) else {
+                print("🔴 Failed to decode questions data")
+                completion(.failure(NetworkError.decodingError))
+                return
+            }
+            
+            completion(.success(response.results))
+            
         }
+        task.resume()
     }
 }
 

@@ -14,26 +14,17 @@ protocol GameDelegate: AnyObject {
     func proceedToTheNextQuestion(_ question: Question, questionNumber: Int)
     func onShowTheQuestion(_ question: Question, questionNumber: Int)
     
-    
     func endGame(moneyWon: Int)
-    func updateTimerLabel(_ timeRemaining: Int)
     
     func fiftyFiftyButtonUsed(wrongAnswer1: String, wrongAnswer2: String)
     func audienceHelpButtonUsed(audienceAnswer: String)
     func callFriendButtonUsed(friendsAnswer: String)
     
-    
-    func takeMoneyButtonTapped()
-}
-
-protocol EndGameDelegate: AnyObject {
-    func endGame(moneyWon: Int)
 }
 
 
 class GameViewModel {
     weak var gameDelegate: GameDelegate? //QuestionViewController
-    weak var endGame: EndGameDelegate? //progress VC
     
     let dataManager = DataManager()
     var helpButtonsInactive = false
@@ -43,12 +34,9 @@ class GameViewModel {
     
     private var currentQuestionIndex = 0
     
-    private var timer: Timer?
-    private var remainingTime = 30
-    
-    private var hasFiftyFiftyUsed = false
-    private var hasAudienceHelpUsed = false
-    private var hasFriendCall = false
+    var hasFiftyFiftyUsed = false
+    var hasAudienceHelpUsed = false
+    var hasFriendCallUsed = false
     
     init() {
         loadQuestions()
@@ -56,70 +44,16 @@ class GameViewModel {
     
     
     func loadQuestions() {
-        let dummyData = generateDummyQuestions()
-        questions = dummyData
-        
-//        dataManager.fetchDataOnline { [weak self] result in
-//            switch result {
-//            case .success(let questionsByLevel):
-//                for (level, questions) in questionsByLevel {
-//                    self?.questions.append(contentsOf: questions)
-//                    print(questions.count)
-//                }
-//            case.failure(let error):
-//                print("⚠️ Failed to load questions: \(error.localizedDescription)")
-//
-//            }
-//        }
+        dataManager.fetchDataOnline(questionsByLevel: .easy, completion: { [weak self] result in
+            switch result {
+            case .success(let questions):
+                print("⚠️ \(questions)")
+                self?.questions = questions
+            case .failure(let error):
+                print("⚠️ Failed to load questions: \(error.localizedDescription)")
+            }
+        })
     }
-    
-    func generateDummyQuestions() -> [Question] {
-        let questions: [Question] = [
-            Question(
-                type: "multiple",
-                difficulty: "easy",
-                category: "General Knowledge",
-                question: "What is the capital of France?",
-                correctAnswer: "Paris",
-                incorrectAnswers: ["London", "Berlin", "Rome"]
-            ),
-            Question(
-                type: "multiple",
-                difficulty: "medium",
-                category: "Science",
-                question: "What is the chemical symbol for water?",
-                correctAnswer: "H2O",
-                incorrectAnswers: ["CO2", "O2", "NaCl"]
-            ),
-            Question(
-                type: "multiple",
-                difficulty: "hard",
-                category: "History",
-                question: "In which year did World War II end?",
-                correctAnswer: "1945",
-                incorrectAnswers: ["1939", "1941", "1943"]
-            ),
-            Question(
-                type: "multiple",
-                difficulty: "easy",
-                category: "Geography",
-                question: "What is the largest ocean on Earth?",
-                correctAnswer: "Pacific Ocean",
-                incorrectAnswers: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean"]
-            ),
-            Question(
-                type: "multiple",
-                difficulty: "medium",
-                category: "Entertainment",
-                question: "Who directed the movie 'Inception'?",
-                correctAnswer: "Christopher Nolan",
-                incorrectAnswers: ["Steven Spielberg", "Martin Scorsese", "Quentin Tarantino"]
-            )
-        ]
-        
-        return questions
-    }
-    
     func startGame() {
         playTimeTickingSound()
         helpButtonsInactive = false
@@ -127,26 +61,22 @@ class GameViewModel {
         gameDelegate?.onShowTheQuestion(questions[currentQuestionIndex], questionNumber: currentQuestionIndex+1)
     }
     
-    private func displayQuestion() {
-        // Отображение вопроса и вариантов ответов
+    func goToNextQuestion() {
+        currentQuestionIndex += 1
+        playTimeTickingSound()
+        gameDelegate?.onShowTheQuestion(questions[currentQuestionIndex], questionNumber: currentQuestionIndex)
     }
     
-    
-    private func startTimer() {
-        // Запуск таймера
-    }
-    
-    private func stopTimer() {
-        // Остановка таймера
+    func getQuestionNumber() -> Int {
+        currentQuestionIndex + 1
     }
     
     
     func selectAnswer(_ selectedAnswer: String) {
         //  answer is selected
         playDecisionMadeSound()
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        print("ℹ️ \(currentQuestionIndex)")
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.timeAfterAnswer) {
             // After 3 seconds, show the correct answer
             self.showCorrectAnswer()
             self.helpButtonsInactive = false
@@ -165,34 +95,34 @@ class GameViewModel {
     
     private func currectAnswerLogic() {
         self.playCorrectAnswerSound()
-        
-        //подождать 2 секунды...
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.currentQuestionIndex += 1
-            self.gameDelegate?.proceedToTheNextQuestion(self.questions[self.currentQuestionIndex], questionNumber: self.currentQuestionIndex + 1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.timeAfterAnswer) {
+            if self.currentQuestionIndex == 14 {
+                //если вопрос был последний - надо проиграть звук победи и опосестить делегат об окончании игры с суммой выйгрыша = 1 миллион
+                self.playGameWinningSound()
+                self.gameDelegate?.endGame(moneyWon: 1_000_000)
+            } else {
+                //если вопрос не последний - оповести делегат, о переходе к следующему вопросу:
+                self.gameDelegate?.proceedToTheNextQuestion(self.questions[self.currentQuestionIndex], questionNumber: self.currentQuestionIndex)
+            }
         }
-        
-        //TODO: если вопрос не последний - оповести делегат, о переходе к следующему вопросу:
-        
-        //TODO: если вопрос был последний - надо проиграть звук победи и опосестить делегат об окончании игры с суммой выйгрыша = 1 миллион (делегат должен реализовать разделение логики, если сумма выигрыша не = 0)
     }
     
     private func wrongAnswerLogic() {
         self.playWrongAnswerSound()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                //подождать 3 секунды...
-                //опосестить делегат об окончании игры с суммой выйгрыша = 0 (делегат должен реализовать разделение логики, если сумма выигрыша = 0)
-                switch self.currentQuestionIndex {
-                case 0..<5:
-                    self.gameDelegate?.endGame(moneyWon: 0)
-                case 6..<10:
-                    self.gameDelegate?.endGame(moneyWon: 1000)
-                case 11..<15:
-                    self.gameDelegate?.endGame(moneyWon: 32000)
-                default:
-                    print("Answer is not within the specified ranges")
-                }
-                
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.timeAfterAnswer) {
+            //опосестить делегат об окончании игры с суммой выйгрыша = 0 (делегат должен реализовать разделение логики, если сумма выигрыша = 0)
+            switch self.currentQuestionIndex {
+            case 0...5:
+                self.gameDelegate?.endGame(moneyWon: 0)
+            case 6...10:
+                self.gameDelegate?.endGame(moneyWon: 1000)
+            case 11..<15:
+                self.gameDelegate?.endGame(moneyWon: 32000)
+            default:
+                print("Answer is not within the specified ranges")
+            }
+            
+            self.stopMusic()
         }
     }
     
@@ -229,7 +159,7 @@ class GameViewModel {
     }
     
     func callFriendButtonTapped() {
-        if !hasFriendCall, !helpButtonsInactive {
+        if !hasFriendCallUsed, !helpButtonsInactive {
             print("phoneFriendButtonTapped")
             // Звонок другу с вероятностью 80% даст правильный ответ
             
@@ -237,16 +167,10 @@ class GameViewModel {
             
             gameDelegate?.callFriendButtonUsed(friendsAnswer: friendsAnswer ?? "No answer")
             
-            hasFriendCall = true
+            hasFriendCallUsed = true
             helpButtonsInactive = true
         }
     }
-    
-    func takeMoneyButtonTapped() {
-        // Реализация кнопки "Забрать деньги"
-        
-    }
-    
     
     func getBoolWithProbability(of percent: Int) -> Bool {
         // Generate a random number between 0 and 99
@@ -261,7 +185,7 @@ class GameViewModel {
     }
     
     // MARK: - Sounds
-    private func playGameStartsSound() {
+    private func playGameWinningSound() {
         playSound("sound_game_starts")
     }
     
@@ -269,7 +193,7 @@ class GameViewModel {
         playSound("sound_decision_made")
     }
     
-     private func playCorrectAnswerSound() {
+    private func playCorrectAnswerSound() {
         playSound("sound_right_answer")
     }
     
@@ -294,6 +218,15 @@ class GameViewModel {
         } catch {
             print("Error playing sound: \(error.localizedDescription)")
         }
+    }
+    
+    func stopMusic() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
+    
+    private struct Constants {
+        static let timeAfterAnswer: TimeInterval = 1
     }
     
     

@@ -12,16 +12,32 @@ import UIKit
 
 class QuestionViewController: UIViewController {
     
-    // MARK: - UI
+    let amountOfMoneyInInts: [Int] = [
+        100,
+        200,
+        300,
+        500,
+        1000,
+        2000,
+        4000,
+        8000,
+        16000,
+        32000,
+        64000,
+        125000,
+        250000,
+        500000,
+        1000000
+    ]
     
-    var questionNumber = 1
-    var actualSum = 564_000
     var viewModel: GameViewModel
     
     init(viewModel: GameViewModel) {
         self.viewModel = viewModel
-        
         super.init(nibName: nil, bundle: nil)
+        setupProgressBarConstraints()
+        startProgressBarAnimation()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -42,7 +58,7 @@ class QuestionViewController: UIViewController {
     
     private lazy var questionNumberLabel: UILabel = {
         let element = UILabel()
-        element.font = .systemFont(ofSize: 24)
+        element.font = .systemFont(ofSize: 22)
         element.textColor = .white
         element.textAlignment = .center
         element.numberOfLines = 0
@@ -50,6 +66,18 @@ class QuestionViewController: UIViewController {
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
+    
+    private lazy var progressBar: UIProgressView = {
+        let progressBar = UIProgressView()
+        progressBar.progressTintColor = .yellow
+        progressBar.trackTintColor = .black
+        progressBar.translatesAutoresizingMaskIntoConstraints = false
+        return progressBar
+    }()
+    
+    private var timer: Timer?
+    private var progress: Float = 1.0
+    private let duration: TimeInterval = 30.0 // Total duration in seconds
     
     private lazy var logo: UIImageView = {
         let element = UIImageView()
@@ -61,7 +89,7 @@ class QuestionViewController: UIViewController {
     
     private lazy var actualSumLabel: UILabel = {
         let element = UILabel()
-        element.font = .systemFont(ofSize: 30)
+        element.font = .systemFont(ofSize: 22)
         element.textColor = .white
         element.textAlignment = .center
         element.numberOfLines = 0
@@ -69,7 +97,6 @@ class QuestionViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.groupingSeparator = " "
-        element.text = numberFormatter.string(from: NSNumber(value: actualSum))
         
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -161,9 +188,9 @@ class QuestionViewController: UIViewController {
     
     private lazy var halfHelp: UIButton = {
         let element = UIButton()
-        element.setImage(UIImage(named: "help_50_50"), for: .normal)
+        element.setBackgroundImage(viewModel.hasFiftyFiftyUsed ? UIImage(named: "help_50_50_crossed") : UIImage(named: "help_50_50"), for: .normal)
+        element.isEnabled = !viewModel.hasFiftyFiftyUsed
         element.contentMode = .scaleAspectFit
-        
         element.addTarget(self, action: #selector(fiftyFiftyButtonTapped), for: .touchUpInside)
         
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -172,7 +199,8 @@ class QuestionViewController: UIViewController {
     
     private lazy var callHelp: UIButton = {
         let element = UIButton()
-        element.setImage(UIImage(named: "help_friend"), for: .normal)
+        element.setBackgroundImage(viewModel.hasFriendCallUsed ? UIImage(named: "help_friend_crossed") : UIImage(named: "help_friend"), for: .normal)
+        element.isEnabled = !viewModel.hasFriendCallUsed
         element.contentMode = .scaleAspectFit
         
         element.addTarget(self, action: #selector(callFriendButtonTapped), for: .touchUpInside)
@@ -183,7 +211,8 @@ class QuestionViewController: UIViewController {
     
     private lazy var friendHelp: UIButton = {
         let element = UIButton()
-        element.setImage(UIImage(named: "help_audience"), for: .normal)
+        element.setBackgroundImage(viewModel.hasAudienceHelpUsed ? UIImage(named: "help_audience_crossed") : UIImage(named: "help_audience"), for: .normal)
+        element.isEnabled = !viewModel.hasAudienceHelpUsed
         element.contentMode = .scaleAspectFit
         
         element.addTarget(self, action: #selector(audienceHelpButtonTapped), for: .touchUpInside)
@@ -197,12 +226,32 @@ class QuestionViewController: UIViewController {
     
    
     @objc func answerButtonTapped(_ sender: UIButton) {
+        timer?.invalidate()
+        timer = nil
+        
+        callHelp.isEnabled = false
+        halfHelp.isEnabled = false
+        friendHelp.isEnabled = false
+        
         if let answer = sender.titleLabel?.text {
             let trimmedAnswer = String(answer.suffix(from: answer.index(answer.startIndex, offsetBy: 3)))
             print(trimmedAnswer)
             viewModel.selectAnswer(trimmedAnswer)
         }
         sender.setBackgroundImage(UIImage(named: "question_selected"), for: .normal)
+        
+        
+        let answerButtons = [answerA, answerB, answerC, answerD]
+        
+        for button in answerButtons {
+            guard button != sender else {
+                // If the button's text does not contain answer1 or answer2, skip to the next iteration
+                continue
+            }
+            
+            button.isEnabled = false
+        }
+        
     }
     
     
@@ -228,6 +277,8 @@ class QuestionViewController: UIViewController {
         
         setView()
         setupConstraints()
+        
+        view.addSubview(progressBar)
         
         variantsStackView.spacing = 15
         footerStackView.spacing = 15
@@ -284,6 +335,38 @@ class QuestionViewController: UIViewController {
         view.addSubview(footerStackView)
         
     }
+    
+    //by Paddubny
+    private func setupProgressBarConstraints() {
+        NSLayoutConstraint.activate([
+            progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            progressBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            progressBar.heightAnchor.constraint(equalToConstant: 5)
+        ])
+    }
+    //by Paddubny
+    private func startProgressBarAnimation() {
+        self.progressBar.setProgress(1, animated: false)
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
+            self.progress -= Float(timer.timeInterval) / Float(self.duration)
+            self.progressBar.setProgress(self.progress, animated: false)
+            
+            if self.progress <= 0 {
+                timer.invalidate()
+                //stop the game...
+                switch viewModel.getQuestionNumber() {
+                case 1...5:
+                    self.navigationController?.pushViewController(StartGameViewController(gameViewModel: GameViewModel(), winning: 0), animated: true)
+                case 6...10:
+                    self.navigationController?.pushViewController(StartGameViewController(gameViewModel: GameViewModel(), winning: 1_000), animated: true)
+                default:
+                    self.navigationController?.pushViewController(StartGameViewController(gameViewModel: GameViewModel(), winning: 32_000), animated: true)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - ViewModel Delegate
@@ -318,8 +401,14 @@ extension QuestionViewController: GameDelegate {
     
     func onShowTheQuestion(_ question: Question, questionNumber: Int) {
         
-        questionNumberLabel.text = "Question \n\(questionNumber)"
-        questLabel.text = "\(question.question)"
+        questionNumberLabel.text = "Question \n\(viewModel.getQuestionNumber())"
+        
+        actualSumLabel.text = "\(amountOfMoneyInInts[viewModel.getQuestionNumber()-1])USD"
+        
+        if let decodedString = question.question.htmlDecoded {
+            questLabel.text = "\(question.question)"
+        }
+       
         
         var answers = question.incorrectAnswers
         answers.append(question.correctAnswer)
@@ -342,8 +431,8 @@ extension QuestionViewController: GameDelegate {
             
             button.setBackgroundImage(UIImage(named: "question_right"), for: .normal)
         }
-       
-        }
+        
+    }
     
     func configureAnswerButtons(withQuestions questions: [String]) {
         let answerButtons = [answerA, answerB, answerC, answerD]
@@ -368,20 +457,13 @@ extension QuestionViewController: GameDelegate {
     func endGame(moneyWon: Int) {
         print("Game ended - \(moneyWon)")
         if moneyWon == 0 {
-//            let progressVC = ProgressViewController(viewModel: viewModel)
-            self.navigationController?.pushViewController(StartGameViewController(), animated: true)
+            self.navigationController?.pushViewController(StartGameViewController(gameViewModel: GameViewModel(), winning: 0), animated: true)
         } else {
-            ProgressViewController(viewModel: viewModel)
+            //дошел до несгораемой суммы
+            self.navigationController?.pushViewController(ProgressViewController(viewModel: viewModel, endingGame: true), animated: true)
         }
     }
     
-    func updateTimerLabel(_ timeRemaining: Int) {
-        
-    }
-    
-    func takeMoneyButtonTapped() {
-        
-    }
     
     func deactiveteTwoButtonsWith(answer1: String, answer2: String) {
         

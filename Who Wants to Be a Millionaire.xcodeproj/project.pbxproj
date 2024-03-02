@@ -24,6 +24,7 @@
 		2D1DD83C2B8F8005005186A4 /* sound_right_answer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DD8372B8F8005005186A4 /* sound_right_answer.mp3 */; };
 		2D1DD83F2B8F86C6005186A4 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */; };
 		2D2E0D6F2B90FD6E002A08B0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D2E0D6E2B90FD6E002A08B0 /* Roboto-Regular.ttf */; };
+		2D9E09262B934FBB00F6B184 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9E09252B934FBA00F6B184 /* Extensions.swift */; };
 		6FE0D84B2B8E5BDD008C045E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */; };
 		D05D22F02B90A4CB0099D5FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22EF2B90A4CB0099D5FA /* Constants.swift */; };
 		D05D22F22B90A4E20099D5FA /* ProgressViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D22F12B90A4E20099D5FA /* ProgressViewCell.swift */; };
@@ -52,6 +53,7 @@
 		2D1DD8372B8F8005005186A4 /* sound_right_answer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_right_answer.mp3; sourceTree = "<group>"; };
 		2D1DD83E2B8F86C6005186A4 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		2D2E0D6E2B90FD6E002A08B0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		2D9E09252B934FBA00F6B184 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6FE0D84A2B8E5BDD008C045E /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		D05D22EF2B90A4CB0099D5FA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D05D22F12B90A4E20099D5FA /* ProgressViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewCell.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				2D2E0D6E2B90FD6E002A08B0 /* Roboto-Regular.ttf */,
 				D05D22EF2B90A4CB0099D5FA /* Constants.swift */,
+				2D9E09252B934FBA00F6B184 /* Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -222,7 +225,6 @@
 			files = (
 				2D1DD8002B8CECF4005186A4 /* LaunchScreen.storyboard in Resources */,
 				2D1DD8392B8F8005005186A4 /* sound_game_starts.mp3 in Resources */,
-				2DF43EA22B8FD6CF0039F90E /* Roboto-Regular.ttf in Resources */,
 				2D1DD83C2B8F8005005186A4 /* sound_right_answer.mp3 in Resources */,
 				2D1DD83A2B8F8005005186A4 /* sound_wrong_answer.mp3 in Resources */,
 				2D1DD83B2B8F8005005186A4 /* sound_decision_made.mp3 in Resources */,
@@ -250,6 +252,7 @@
 				2D1DD80E2B8E18C2005186A4 /* DataManager.swift in Sources */,
 				D05D22F02B90A4CB0099D5FA /* Constants.swift in Sources */,
 				2D1DD8112B8E2013005186A4 /* GameViewModel.swift in Sources */,
+				2D9E09262B934FBB00F6B184 /* Extensions.swift in Sources */,
 				2D1DD80C2B8E12F2005186A4 /* Question.swift in Sources */,
 				2D1DD7F62B8CECF2005186A4 /* SceneDelegate.swift in Sources */,
 				2D1DD8082B8CF1DE005186A4 /* StartGameViewController.swift in Sources */,

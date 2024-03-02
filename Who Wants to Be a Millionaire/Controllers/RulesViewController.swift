@@ -8,7 +8,18 @@
 import UIKit
 
 class RulesViewController: UIViewController {
-
+    let gameViewModel: GameViewModel
+    
+    init(gameViewModel: GameViewModel) {
+        self.gameViewModel = gameViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,7 +78,6 @@ class RulesViewController: UIViewController {
     
     
     @objc func buttonTapped() {
-        let startVC = StartGameViewController()
-        navigationController?.pushViewController(startVC, animated: true)
+        self.navigationController?.pushViewController(StartGameViewController(gameViewModel: gameViewModel), animated: true)
     }
 }

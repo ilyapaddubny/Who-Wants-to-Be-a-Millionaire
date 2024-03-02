@@ -8,12 +8,14 @@
 import UIKit
 
 class StartGameViewController: UIViewController {
-    
+    let gameViewModel: GameViewModel
     let logo = UIImageView()
     let playButton = UIButton()
     let rulesButton = UIButton()
     let stackView = UIStackView()
-    
+    let infoLabel = UILabel()
+    var winning: Int? = nil
+
     private lazy var backgroundImageView: UIImageView = {
         let element = UIImageView()
         element.image = UIImage(named: "background_crowd")
@@ -21,12 +23,25 @@ class StartGameViewController: UIViewController {
         return element
     }()
     
+    init(gameViewModel: GameViewModel, winning: Int? = nil) {
+        self.gameViewModel = gameViewModel
+        self.winning = winning
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         view.addSubview(backgroundImageView)
         style()
         layout()
+        if let winning = winning {
+            setAtributedText(winningAmount: winning)
+        }
         
         // Add target action to play button
         playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
@@ -35,8 +50,6 @@ class StartGameViewController: UIViewController {
     }
     
     @objc private func playButtonTapped() {
-        
-        let gameViewModel = GameViewModel() // Assuming you have a GameViewModel initializer
         let gameVC = QuestionViewController(viewModel: gameViewModel)
         gameViewModel.gameDelegate = gameVC
         gameViewModel.startGame()
@@ -44,7 +57,7 @@ class StartGameViewController: UIViewController {
     }
     
     @objc private func rulesButtonTapped() {
-        self.navigationController?.pushViewController(RulesViewController(), animated: true)
+        self.navigationController?.pushViewController(RulesViewController(gameViewModel: gameViewModel), animated: true)
     }
     
 }
@@ -68,6 +81,28 @@ extension StartGameViewController {
         rulesButton.layer.cornerRadius = 10
         rulesButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         
+        infoLabel.textAlignment = .center // Center the text
+        infoLabel.textColor = .white // Set text color
+        infoLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        infoLabel.numberOfLines = 2 // Allow multiple lines
+        
+    }
+    
+    func setAtributedText(winningAmount: Int) {
+        let winningMessage = "The winning is\n"
+        if let winning {
+            let winningAmountText = "\(winning) USD"
+            let attributedText = NSMutableAttributedString(string: winningMessage + winningAmountText)
+            
+            attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 35, weight: .bold), range: NSRange(location: 0, length: winningMessage.count))
+            attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 45), range: NSRange(location: winningMessage.count, length: winningAmountText.count))
+            attributedText.addAttribute(.foregroundColor, value: UIColor.yellow, range: NSRange(location: winningMessage.count, length: winningAmountText.count))
+            infoLabel.attributedText = attributedText
+        }
+        
+        
+        
+        
     }
     
     private func layout() {
@@ -75,6 +110,8 @@ extension StartGameViewController {
         stackView.axis = .vertical
         stackView.spacing = 15
         stackView.addArrangedSubview(logo)
+        stackView.addArrangedSubview(infoLabel)
+
         stackView.addArrangedSubview(playButton)
         stackView.addArrangedSubview(rulesButton)
         view.addSubview(stackView)
@@ -87,7 +124,7 @@ extension StartGameViewController {
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -250),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150),
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             
