@@ -54,6 +54,11 @@ class GameViewModel {
             }
         })
     }
+    
+    func getCurrectAnswer() -> String {
+        questions[currentQuestionIndex].correctAnswer
+    }
+    
     func startGame() {
         playTimeTickingSound()
         helpButtonsInactive = false
@@ -157,6 +162,7 @@ class GameViewModel {
             helpButtonsInactive = true
         }
     }
+    
     
     func callFriendButtonTapped() {
         if !hasFriendCallUsed, !helpButtonsInactive {

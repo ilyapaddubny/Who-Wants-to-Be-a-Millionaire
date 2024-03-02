@@ -379,7 +379,10 @@ extension QuestionViewController: GameDelegate {
     }
     
     func audienceHelpButtonUsed(audienceAnswer: String) {
-        showAlertWith(title: "Friend's help results", message: audienceAnswer)
+//        showAlertWith(title: "Friend's help results", message: audienceAnswer)
+        let voteVC = VoteAudienceViewController()
+        voteVC.delegate = self
+        self.present(voteVC, animated: true, completion: nil)
         friendHelp.setImage(UIImage(named: "help_audience_crossed"), for: .normal)
         friendHelp.isEnabled = false
     }
@@ -568,6 +571,36 @@ extension UIStackView {
         self.alignment = .fill
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+}
+
+extension QuestionViewController: VoteAudienceViewControllerDelegate {
+    func getCorrectAnswer(_ viewController: VoteAudienceViewController) -> Int {
+        let answerButtons = [answerA, answerB, answerC, answerD]
+        let rightAnswer = viewModel.getCurrectAnswer()
+        
+        for (index, button) in answerButtons.enumerated() {
+            guard let buttonText = button.titleLabel?.text,
+                  buttonText.contains(rightAnswer) else {
+                continue
+            }
+            print("🔴 answer index - \(index)")
+            return index
+        }
+        
+        // Default to returning 0 if no correct answer is found
+        return 0
+    }
+    
+    func getQuestionDifficulty(_ viewController: VoteAudienceViewController) -> QuestionDifficulty {
+        switch viewModel.getQuestionNumber() {
+        case 11...15:
+            return .hard
+        default:
+            return .easy
+        }
+    }
+    
+    
 }
 
 
