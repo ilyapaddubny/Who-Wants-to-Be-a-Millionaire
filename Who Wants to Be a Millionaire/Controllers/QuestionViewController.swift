@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class QuestionViewController: UIViewController {
+class QuestionViewController: UIViewController, UINavigationControllerDelegate {
     
     let amountOfMoneyInInts: [Int] = [
         100,
@@ -381,8 +381,9 @@ extension QuestionViewController: GameDelegate {
     func audienceHelpButtonUsed(audienceAnswer: String) {
 //        showAlertWith(title: "Friend's help results", message: audienceAnswer)
         let voteVC = VoteAudienceViewController()
-        voteVC.delegate = self
-        self.present(voteVC, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: voteVC)
+        navController.delegate = self
+        self.present(navController, animated: true, completion: nil)
         friendHelp.setImage(UIImage(named: "help_audience_crossed"), for: .normal)
         friendHelp.isEnabled = false
     }

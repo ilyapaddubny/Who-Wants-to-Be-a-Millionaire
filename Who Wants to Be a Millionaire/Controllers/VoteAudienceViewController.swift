@@ -39,11 +39,12 @@ class VoteAudienceViewController: UIViewController {
 		setupCorrectAnswer()
 		setupQuestionDifficulty()
 		votingGraphView.delegate = self
-		
+        setButton()
 		generateVoteData(with: correctAnswerIndex)
 		addSubviews()
 		setupVotingGraphView()
 		setupConstraints()
+       
     }
 
 	private func setupCorrectAnswer() {
@@ -57,6 +58,10 @@ class VoteAudienceViewController: UIViewController {
 			self.questionDifficulty = questionDifficulty
 		}
 	}
+    
+    @objc func dismissModal() {
+           dismiss(animated: true, completion: nil)
+       }
 
 }
 
@@ -132,6 +137,12 @@ private extension VoteAudienceViewController {
 		votingGraphView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
 		votingGraphView.translatesAutoresizingMaskIntoConstraints = false
 	}
+    
+    func setButton() {
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(dismissModal))
+        backButton.tintColor = .white
+        navigationItem.rightBarButtonItem = backButton
+    }
 	
 	func setupConstraints() {
 		NSLayoutConstraint.activate([

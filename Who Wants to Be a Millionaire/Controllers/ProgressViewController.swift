@@ -86,7 +86,7 @@ class ProgressViewController: UIViewController {
     }
     
     private func showEndingGame() {
-        //после неверного ответа, но пользоваттель дошел до несгораемой суммы
+        //после неверного ответа, но пользователь дошел до несгораемой суммы
         continueButton.isHidden = true
         grabMoneyButton.isHidden = true
         
