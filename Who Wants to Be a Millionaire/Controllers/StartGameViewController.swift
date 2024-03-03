@@ -71,6 +71,11 @@ extension StartGameViewController {
         logo.image = UIImage(named: "logo.png")
         logo.contentMode = .scaleAspectFit
         
+        
+        // Adjusting the size of the logo
+        logo.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        logo.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        
         playButton.setTitle("Start the game!", for: .normal)
         playButton.backgroundColor = .myPurple
         playButton.layer.cornerRadius = 10
@@ -117,6 +122,7 @@ extension StartGameViewController {
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
+            
             
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
