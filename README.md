@@ -13,7 +13,21 @@ This project is an iOS app based on the popular TV game show "Who Wants to Be a 
 
 ## Screenshots
 
-[Insert screenshots of your app here]
+<p align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/ilyapaddubny/Who-Wants-to-Be-a-Millionaire/blob/develop/Screenshots/IMG_4667.PNG" width="300" alt="Screenshot 1">
+      </td>
+      <td align="center">
+        <img src="https://github.com/ilyapaddubny/Who-Wants-to-Be-a-Millionaire/blob/develop/Screenshots/IMG_4665.PNG" width="300" alt="Screenshot 2">
+      </td>
+      <td align="center">
+        <img src="https://github.com/ilyapaddubny/Who-Wants-to-Be-a-Millionaire/blob/develop/Screenshots/IMG_4666.PNG" width="300" alt="Screenshot 3">
+      </td>
+    </tr>
+  </table>
+</p>
 
 ## Getting Started
 
