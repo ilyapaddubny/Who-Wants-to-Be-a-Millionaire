@@ -141,7 +141,7 @@ private extension VoteAudienceViewController {
     func setButton() {
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(dismissModal))
         backButton.tintColor = .white
-        navigationItem.rightBarButtonItem = backButton
+        navigationItem.leftBarButtonItem = backButton
     }
 	
 	func setupConstraints() {

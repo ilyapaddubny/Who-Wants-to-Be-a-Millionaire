@@ -449,12 +449,17 @@ extension QuestionViewController: GameDelegate {
             let button = answerButtons[index]
             
             let answerLetter = String(UnicodeScalar(65 + index)!)
-            let labeledQuestion = "\(answerLetter): \(question)"
+            if let decodedQuestion = question.htmlDecoded {
+                let labeledQuestion = "\(answerLetter): \(decodedQuestion)"
+                
+                let attributedTitle = NSMutableAttributedString(string: labeledQuestion)
+                attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
+                attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
+                
+                
+                button.setAttributedTitle(attributedTitle, for: .normal)
+            }
             
-            let attributedTitle = NSMutableAttributedString(string: labeledQuestion)
-            attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: "AnswerVariantText") as Any, range: NSRange(location: 0, length: 2))
-            attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location: 2, length: attributedTitle.length - 2))
-            button.setAttributedTitle(attributedTitle, for: .normal)
         }
     }
     
