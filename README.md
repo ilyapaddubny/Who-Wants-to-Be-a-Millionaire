@@ -63,12 +63,13 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 | vsiisv | <img src="https://avatars.githubusercontent.com/vsiisv" width="30" height="30"> | [vsiisv](https://github.com/vsiisv) |
 | yaprincev | <img src="https://avatars.githubusercontent.com/yaprincev" width="30" height="30"> | [yaprincev](https://github.com/yaprincev) |
 
+## License
+
+This project is licensed under the [MIT License](LICENSE).   
+
 ---
 <p align="center">
   <img src="https://github.com/ilyapaddubny/Who-Wants-to-Be-a-Millionaire/blob/develop/Who%20Wants%20to%20Be%20a%20Millionaire/Assets.xcassets/AppIcon.appiconset/AppIcon~ios-marketing.png" width="80" alt="App Icon">
 </p>
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).   
 
