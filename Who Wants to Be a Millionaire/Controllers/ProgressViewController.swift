@@ -98,6 +98,8 @@ class ProgressViewController: UIViewController {
                 1000
             case 11..<15:
                 32000
+            case 15:
+                1000000
             default:
                 0
             }
