@@ -105,9 +105,6 @@ extension StartGameViewController {
             infoLabel.attributedText = attributedText
         }
         
-        
-        
-        
     }
     
     private func layout() {
